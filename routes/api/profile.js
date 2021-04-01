@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
-
+const { check, validationResult } = require('express-validator');
+const normalize = require('normalize-url');
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 
@@ -24,5 +25,76 @@ router.get('/me', auth, async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
+// @DESC      CREATE OR UPDATE A USER PROFILE
+// @ROUTE     POST /api/profile
+// @ACCESS    PRIVATE
+
+router.post(
+  '/',
+  auth,
+  check('status', 'Status is required').notEmpty(),
+  check('skills', 'Skills is required').notEmpty(),
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    // destructure the request
+    const {
+      website,
+      skills,
+      youtube,
+      twitter,
+      instagram,
+      linkedin,
+      facebook,
+      // SPREAD THE REST OF THE FIELDS SO WE DON'T HAVE TO CHECK
+      ...rest
+    } = req.body;
+
+    // BUILD A PROFILE
+    const profileFields = {
+      user: req.user.id,
+      website:
+        website && website !== ''
+          ? normalize(website, { forceHttps: true })
+          : '',
+      skills: Array.isArray(skills)
+        ? skills
+        : skills.split(',').map((skill) => ' ' + skill.trim()),
+      ...rest,
+    };
+
+    // BUILD SOCIAL FIELDS
+    const socialFields = { youtube, twitter, instagram, linkedin, facebook };
+
+    // USE NORMALIZE TO ENSURE THAT A VALID URL IS RECIEVED
+    for (const [key, value] of Object.entries(socialFields)) {
+      if (value && value.length > 0) {
+        socialFields[key] = normalize(value, { forceHttp: true });
+      }
+    }
+    // ADD TO PROFILE FIELDS
+    profileFields.social = socialFields;
+
+    try {
+      let profile = await Profile.findOneAndUpdate(
+        { user: req.user.id },
+        { $set: profileFields },
+        {
+          new: true,
+          upsert: true,
+          setDefaultsOnInsert: true,
+        }
+      );
+      return res.json(profile);
+    } catch (error) {
+      console.error(error.message);
+      return res.status(500).send('Server Error');
+    }
+  }
+);
 
 module.exports = router;
