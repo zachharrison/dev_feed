@@ -42,7 +42,6 @@ router.post(
 // @DESC      GET ALL POSTS
 // @ROUTE     GET /api/posts
 // @ACCESS    Private
-
 router.get('/', auth, async (req, res) => {
   try {
     posts = await Post.find().sort({ date: -1 });
@@ -53,4 +52,19 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
+// @DESC      GET A POST BY IT'S ID
+// @ROUTE     GET /api/posts/:id
+// @ACCESS    PRIVATE
+router.get('/:id', auth, async (req, res) => {
+  try {
+    post = await Post.findById(req.params.id);
+    if (!post) {
+      return res.status(404).json({ msg: 'Post not found' });
+    }
+    res.json(post);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
 module.exports = router;
