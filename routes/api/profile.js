@@ -148,7 +148,7 @@ router.delete('/', auth, async (req, res) => {
 });
 
 // @DESC      ADD PROFILE EXPERIENCE
-// @ROUTE     PUT /api/profile
+// @ROUTE     PUT /api/profile/experience
 // @ACCESS    PRIVATE
 router.put(
   '/experience',
@@ -181,7 +181,7 @@ router.put(
 );
 
 // @DESC      DELETE PROFILE EXPERIENCE
-// @ROUTE     DELETE /api/profile
+// @ROUTE     DELETE /api/profile/experience/:exp_id
 // @ACCESS    PRIVATE
 router.delete('/experience/:exp_id', auth, async (req, res) => {
   try {
@@ -199,4 +199,56 @@ router.delete('/experience/:exp_id', auth, async (req, res) => {
   }
 });
 
+// @DESC      ADD PROFILE EDUCATION
+// @ROUTE     PUT /api/profile/education
+// @ACCESS    PRIVATE
+router.put(
+  '/education',
+  auth,
+  check('school', 'School is required').notEmpty(),
+  check('degree', 'Degree is required').notEmpty(),
+  check('fieldofstudy', 'Field of study is required').notEmpty(),
+  check('from', 'From date is required and needs to be from the past')
+    .notEmpty()
+    .custom((value, { req }) => (req.body.to ? value < req.body.to : true)),
+  async (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+      const profile = await Profile.findOne({ user: req.user.id });
+
+      profile.education.unshift(req.body);
+
+      await profile.save();
+
+      res.json(profile);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
+// @DESC      DELETE PROFILE EDUCATION
+// @ROUTE     DELETE /api/profile/education/:edu_id
+// @ACCESS    PRIVATE
+router.delete('/education/:edu_id', auth, async (req, res) => {
+  try {
+    const profile = await Profile.findOne({ user: req.user.id });
+    profile.education = profile.education.filter(
+      (edu) => edu._id.toString() !== req.params.edu_id
+    );
+
+    await profile.save();
+
+    return res.status(200).json(profile);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
 module.exports = router;
