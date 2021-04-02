@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
+const checkObjectId = require('../../middleware/checkObjectId');
 const { check, validationResult } = require('express-validator');
 const axios = require('axios');
 const config = require('config');
@@ -114,7 +115,7 @@ router.get('/', async (req, res) => {
 // @DESC      GET USERS PROFILE BY ID
 // @ROUTE     GET /api/profile/user/:user_id
 // @ACCESS    PUBLIC
-router.get('/user/:user_id', async (req, res) => {
+router.get('/user/:user_id', checkObjectId('user_id'), async (req, res) => {
   const id = req.params.user_id;
   try {
     const profile = await Profile.findOne({ user: id }).populate('user', [

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const auth = require('../../middleware/auth');
+const checkObjectId = require('../../middleware/checkObjectId');
 
 const Post = require('../../models/Post');
 const User = require('../../models/User');
@@ -55,7 +56,7 @@ router.get('/', auth, async (req, res) => {
 // @DESC      GET A POST BY IT'S ID
 // @ROUTE     GET /api/posts/:id
 // @ACCESS    PRIVATE
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', auth, checkObjectId('id'), async (req, res) => {
   try {
     post = await Post.findById(req.params.id);
     if (!post) {
@@ -71,7 +72,7 @@ router.get('/:id', auth, async (req, res) => {
 // @DESC      DELETE A POST
 // @ROUTE     DELETE /api/posts/:id
 // @ACCESS    PRIVATE
-router.delete('/:id', auth, async (req, res) => {
+router.delete('/:id', auth, checkObjectId('id'), async (req, res) => {
   try {
     post = await Post.findById(req.params.id);
     if (!post) {
@@ -95,7 +96,7 @@ router.delete('/:id', auth, async (req, res) => {
 // @DESC      LIKE A POST
 // @ROUTE     PUT /api/posts/like/:id
 // @ACCESS    PRIVATE
-router.put('/like/:id', auth, async (req, res) => {
+router.put('/like/:id', auth, checkObjectId('id'), async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
 
@@ -118,7 +119,7 @@ router.put('/like/:id', auth, async (req, res) => {
 // @DESC      UNLIKE A POST
 // @ROUTE     PUT /api/posts/unlike/:id
 // @ACCESS    PRIVATE
-router.put('/unlike/:id', auth, async (req, res) => {
+router.put('/unlike/:id', auth, checkObjectId('id'), async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
 
@@ -147,6 +148,7 @@ router.put('/unlike/:id', auth, async (req, res) => {
 router.put(
   '/comment/:id',
   auth,
+  checkObjectId('id'),
   check('text', 'Text is required').notEmpty(),
   async (req, res) => {
     const errors = validationResult(req);
