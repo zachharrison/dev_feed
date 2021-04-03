@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="../../dist/css/style.min.css" />
-    <title>Welcome to the DevFeed</title>
+    <title>Welcome to DevFeed</title>
   </head>
   <body>
     <nav class="navbar bg-dark">
@@ -18,7 +18,7 @@
         <li><a href="login.html">Login</a></li>
       </ul>
     </nav>
-    <section class="container">
+    <section class="container container-center">
       <h1 class="large text-primary">Sign Up</h1>
       <p class="lead"><i class="fas fa-user"></i> Create Your Account</p>
       <form action="dashboard.html" class="form">
@@ -27,21 +27,23 @@
         </div>
         <div class="form-group">
           <input type="email" placeholder="Email Address" />
-          <small class="form-text">
-            This site uses Gravatar, so if you want a profile image, use a
-            Gravatar email
-          </small>
         </div>
+        <!-- <small class="form-text">
+          This site uses Gravatar, so if you want a profile image, use a
+          Gravatar email
+        </small> -->
         <div class="form-group">
           <input type="password" placeholder="Password" minlength="6" />
         </div>
         <div class="form-group">
           <input type="password" placeholder="Confirm Password" minlength="6" />
         </div>
-        <input type="submit" value="Register" class="btn btn-primary" />
+        <div class="form-group">
+          <input type="submit" value="Register" class="btn btn-primary" />
+        </div>
       </form>
       <p class="my-1">
-        Already have an account? <a href="login.html">Sign In</a>
+        Already have an account? <a href="login.html"> Sign In</a>
       </p>
     </section>
     <script
