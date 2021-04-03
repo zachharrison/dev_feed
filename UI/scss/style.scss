@@ -95,6 +95,7 @@ img {
   display: grid;
   grid-template-areas: 'top top' 'about about' 'exp edu' 'github github';
   grid-gap: 1rem;
+  border-radius: 1rem;
 
   .profile-top {
     grid-area: top;
@@ -103,6 +104,7 @@ img {
     align-items: center;
     justify-content: center;
     text-align: center;
+    border-radius: 1rem;
 
     img {
       width: 250px;
@@ -121,6 +123,7 @@ img {
   .profile-about {
     grid-area: about;
     text-align: center;
+    border-radius: 1rem;
 
     .skills {
       display: flex;
@@ -140,6 +143,8 @@ img {
 
   .profile-exp,
   .profile-edu {
+    border-radius: 1rem;
+
     & > div {
       margin-bottom: 1rem;
       padding-bottom: 1rem;
@@ -156,11 +161,12 @@ img {
   }
 
   .profile-github {
+    border-radius: 1rem;
     grid-area: github;
 
     .repo {
       display: flex;
-
+      border-radius: 1rem;
       & > div:first-child {
         flex: 7;
         flex-basis: 70%;
