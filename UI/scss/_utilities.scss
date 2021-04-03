@@ -115,6 +115,29 @@
   }
 }
 
+// Alerts
+.alert {
+  padding: 0.6rem;
+  margin: 1rem;
+  opacity: 0.9;
+  // background: $light-color;
+  color: $light-color;
+  border-radius: 3rem;
+
+  &.alert-primary {
+    color: $primary-color;
+  }
+  &.alert-dark {
+    color: $dark-color;
+  }
+  &.alert-success {
+    color: $success-color;
+  }
+  &.alert-danger {
+    color: $danger-color;
+  }
+}
+
 .dark-overlay {
   height: 100%;
   width: 100%;
