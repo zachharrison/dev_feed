@@ -31,39 +31,51 @@
     </nav>
     <section class="container container-center">
       <a class="btn my-1" href="dashboard.html">Go Back</a>
-      <h1 class="large text-primary">Add An Experience</h1>
+      <h1 class="large text-primary">Add Your Education</h1>
       <p class="lead">
-        <i class="fas fa-code-branch"></i> Add any developer/programming
-        positions that you have had in the past
+        <i class="fas fa-graduation-cap"></i> Add any school, bootcamp, etc that
+        you have attended
       </p>
       <small>* = required field</small>
       <form class="form">
         <div class="form-group">
-          <input type="text" placeholder="* Job Title" name="title" required />
+          <input
+            type="text"
+            placeholder="* School or Bootcamp"
+            name="school"
+            required
+          />
         </div>
         <div class="form-group">
-          <input type="text" placeholder="* Company" name="company" required />
+          <input
+            type="text"
+            placeholder="* Degree or Certificate"
+            name="degree"
+            required
+          />
         </div>
         <div class="form-group">
-          <input type="text" placeholder="Location" name="location" />
+          <input type="text" placeholder="Field Of Study" name="fieldofstudy" />
         </div>
         <div class="form-group">
           <h4>From Date</h4>
-          <input class="calender" type="date" name="from" />
+          <input type="date" name="from" />
         </div>
         <div class="form-group">
           <h4>To Date</h4>
           <input type="date" name="to" />
         </div>
         <div class="form-group">
-          <p><input type="radio" name="current" value="" /> Current Job</p>
+          <p>
+            <input type="checkbox" name="current" value="" /> Current School
+          </p>
         </div>
         <div class="form-group">
           <textarea
             name="description"
             cols="30"
             rows="5"
-            placeholder="Job Description"
+            placeholder="Program Description"
           ></textarea>
         </div>
         <div class="form-group">
@@ -71,9 +83,5 @@
         </div>
       </form>
     </section>
-    <script
-      src="https://kit.fontawesome.com/f6eb9c801f.js"
-      crossorigin="anonymous"
-    ></script>
   </body>
 </html>
