@@ -42,4 +42,25 @@ router.post('/', auth, async (req, res) => {
   }
 });
 
+router.get('/', auth, async (req, res) => {
+  const from = mongoose.Types.ObjectId(req.user.id);
+
+  try {
+    const conversations = await Conversation.aggregate([
+      {
+        $lookup: {
+          from: 'user',
+          localField: 'recipients',
+          foreignField: '_id',
+        },
+      },
+    ]).match({ recipients: { $all: [{ $elemMatch: { $eq: from } }] } });
+
+    res.json(conversations);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 module.exports = router;
