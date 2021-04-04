@@ -7,6 +7,9 @@ const auth = require('../../middleware/auth');
 const Message = require('../../models/Message');
 const Conversation = require('../../models/Conversation');
 
+// @DESC      CREATE A NEW MESSAGE
+// @ROUTE     POST /api/messages
+// @ACCESS    PRIVATE
 router.post('/', auth, async (req, res) => {
   const from = req.user.id;
   const to = req.body.to;
@@ -42,6 +45,9 @@ router.post('/', auth, async (req, res) => {
   }
 });
 
+// @DESC      GET ALL CONVERSATIONS FOR A USER
+// @ROUTE     GET /api/messages
+// @ACCESS    PRIVATE
 router.get('/', auth, async (req, res) => {
   const from = mongoose.Types.ObjectId(req.user.id);
 
@@ -52,9 +58,16 @@ router.get('/', auth, async (req, res) => {
           from: 'user',
           localField: 'recipients',
           foreignField: '_id',
+          as: 'recipientObj',
         },
       },
     ]).match({ recipients: { $all: [{ $elemMatch: { $eq: from } }] } });
+
+    // .project({
+    //   'recipientObj.password': 0,
+    //   'recipientObj.__v': 0,
+    //   'recipientObj.date': 0,
+    // });
 
     res.json(conversations);
   } catch (error) {
