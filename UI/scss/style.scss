@@ -180,9 +180,16 @@ img {
   }
 }
 
+// NEED TO WORK ON COMMENT SECTION
+
 // Posts Page
-.post-form-header {
-  padding: 0.5rem;
+.post-form .form {
+  margin: auto;
+
+  .form-group textarea,
+  input {
+    width: 100%;
+  }
 }
 
 .post {
@@ -190,6 +197,8 @@ img {
   grid-template-columns: 1fr 4fr;
   grid-gap: 2rem;
   align-items: center;
+  border-radius: 1rem;
+  // background: #eee;
 
   & > div:first-child {
     text-align: center;
@@ -197,5 +206,14 @@ img {
 
   img {
     width: 150px;
+  }
+
+  .comment-form {
+    width: 100%;
+
+    textarea,
+    input {
+      width: 100%;
+    }
   }
 }
