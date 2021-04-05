@@ -72,10 +72,6 @@
   }
 
   .profile-grid {
-    // display: grid !important;
-    // grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    // grid-template-columns: 1fr;
-    // display: flex;
     grid-template-areas:
       'top'
       'about'
