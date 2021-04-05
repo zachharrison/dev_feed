@@ -93,4 +93,11 @@
       padding: 0.3rem 0.4rem;
     }
   }
+  .conversation-items {
+    min-width: 100%;
+    border-radius: 18px;
+  }
+  .conversation {
+    display: none;
+  }
 }
