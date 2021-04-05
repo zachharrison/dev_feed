@@ -10,19 +10,6 @@ const Conversation = require('../../models/Conversation');
 // @DESC      CREATE A NEW MESSAGE
 // @ROUTE     POST /api/messages
 // @ACCESS    PRIVATE
-
-/********************************************************
-  CURRENT STATUS: New messages are being created
-  and messages are not. This is causing the code
-  to create a new conversation everytime a message
-  is sent, even if we already have an 
-  existing chat with the to and from users.
-
-  SOLUTIONS: Maybe look for a different 
-  mongoDB method which checks if table
-  exists
-***********************************************************/
-
 router.post('/', auth, async (req, res) => {
   const from = req.body.from;
   const to = req.body.to;
@@ -108,12 +95,6 @@ router.get('/', auth, async (req, res) => {
         },
       },
     ]).match({ recipients: { $all: [{ $elemMatch: { $eq: from } }] } });
-
-    // .project({
-    //   'recipientObj.password': 0,
-    //   'recipientObj.__v': 0,
-    //   'recipientObj.date': 0,
-    // });
 
     res.json(conversations);
   } catch (error) {
