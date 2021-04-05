@@ -104,7 +104,7 @@ router.get('/conversations', auth, async (req, res) => {
   }
 });
 
-// @DESC      GET ALL MESSGES FROM A CONVERSATION WITH ITS ID
+// @DESC      GET ALL MESSAGES FROM A CONVERSATION WITH ITS ID
 // @ROUTE     GET /api/messages/conversations/:id
 // @ACCESS    PRIVATE
 router.get(
@@ -113,11 +113,13 @@ router.get(
   checkObjectId('id'),
   async (req, res) => {
     try {
-      const conversation = await Conversation.findById(req.params.id);
-      if (!conversation) {
+      const messages = await Message.find({
+        conversation: req.params.id,
+      });
+      if (!messages) {
         return res.status(404).json({ msg: 'Conversation not found' });
       }
-      res.json(conversation);
+      res.json(messages);
     } catch (error) {
       console.error(error.message);
       res.status(500).send('Server Error');
