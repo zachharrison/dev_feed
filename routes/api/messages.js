@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const auth = require('../../middleware/auth');
+const checkObjectId = require('../../middleware/checkObjectId');
 
 const Message = require('../../models/Message');
 const Conversation = require('../../models/Conversation');
@@ -79,9 +80,9 @@ router.post('/', auth, async (req, res) => {
 });
 
 // @DESC      GET ALL CONVERSATIONS FOR A USER
-// @ROUTE     GET /api/messages
+// @ROUTE     GET /api/messages/conversations
 // @ACCESS    PRIVATE
-router.get('/', auth, async (req, res) => {
+router.get('/conversations', auth, async (req, res) => {
   const from = mongoose.Types.ObjectId(req.user.id);
 
   try {
@@ -102,5 +103,26 @@ router.get('/', auth, async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
+// @DESC      GET ALL MESSGES FROM A CONVERSATION WITH ITS ID
+// @ROUTE     GET /api/messages/conversations/:id
+// @ACCESS    PRIVATE
+router.get(
+  '/conversations/:id',
+  auth,
+  checkObjectId('id'),
+  async (req, res) => {
+    try {
+      const conversation = await Conversation.findById(req.params.id);
+      if (!conversation) {
+        return res.status(404).json({ msg: 'Conversation not found' });
+      }
+      res.json(conversation);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
 
 module.exports = router;

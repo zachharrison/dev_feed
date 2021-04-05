@@ -66,12 +66,13 @@
   }
 
   .profile-grid {
-    grid-template-areas:
-      'top'
-      'about'
-      'exp'
-      'edu'
-      'github';
+    // grid-template-areas:
+    //   '.profile-top'
+    //   'profile-about'
+    //   'profile-exp'
+    //   'profile-edu'
+    //   'profile-github';
+    grid-template-columns: repeat(1fr);
   }
 
   .profile-about {
