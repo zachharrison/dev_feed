@@ -1,4 +1,10 @@
 @media (max-width: 700px) {
+  .badge {
+    white-space: nowrap;
+    padding: 3px;
+    width: 6rem;
+    margin-bottom: 0.5rem;
+  }
   .btn {
     white-space: nowrap;
   }
@@ -66,13 +72,16 @@
   }
 
   .profile-grid {
-    // grid-template-areas:
-    //   '.profile-top'
-    //   'profile-about'
-    //   'profile-exp'
-    //   'profile-edu'
-    //   'profile-github';
-    grid-template-columns: repeat(1fr);
+    // display: grid !important;
+    // grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    // grid-template-columns: 1fr;
+    // display: flex;
+    grid-template-areas:
+      'top'
+      'about'
+      'exp'
+      'edu'
+      'github' !important;
   }
 
   .profile-about {
