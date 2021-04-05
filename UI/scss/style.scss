@@ -219,12 +219,73 @@ img {
   }
 }
 
-.conversation-list {
-  color: red;
-  background: grey;
+/* === CONVERSATIONS === */
+
+.conversation-items {
+  width: 30%;
+  height: 100%;
+  box-shadow: 0px 10px 8px 6px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  display: inline-block;
+  border-top-left-radius: 18px;
+  border-bottom-left-radius: 18px;
+}
+
+.conversation-items .conversation-item {
+  width: 100%;
+  height: 100px;
+  background-color: #fafafa;
+  border-bottom: solid 1px #e0e0e0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.conversation-items .conversation-item .photo {
+  margin-left: 20px;
+  display: block;
+  width: 45px;
+  height: 45px;
+  background: #e6e7ed;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.desc-contact {
+  height: 43px;
+  width: 50%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.conversation-items .conversation-item .name {
+  margin: 0 0 0 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11pt;
+  color: #515151;
+}
+
+.conversation-items .conversation-item .message {
+  margin: 6px 0 0 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9pt;
+  color: #515151;
+}
+
+.clickable {
+  cursor: pointer;
 }
 
 .conversation {
-  background: #ccc;
-  color: blue;
+  background: $primary-color;
+  width: 70%;
+  height: 100%;
+  overflow-y: auto;
+  border-top-right-radius: 18px;
+  border-bottom-right-radius: 18px;
+  box-shadow: 0px 10px 8px 6px rgba(0, 0, 0, 0.2);
 }
