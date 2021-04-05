@@ -26,10 +26,7 @@ const Conversation = require('../../models/Conversation');
 router.post('/', auth, async (req, res) => {
   const from = req.body.from;
   const to = req.body.to;
-  // console.log(req.body);
-  // console.log(req.user.id);
-  // console.log('from id, ', from);
-  // console.log('to id, ', to);
+
   try {
     const conversation = await Conversation.findOne({
       recipients: {
@@ -37,14 +34,20 @@ router.post('/', auth, async (req, res) => {
       },
     });
 
-    // console.log(conversation);
-
     if (!conversation) {
-      console.log('created new conversation');
-      const conversation = await new Conversation({
-        recipients: [from, to],
-        lastMessage: req.body.text,
-      });
+      const conversation = await Conversation.findOneAndUpdate(
+        {
+          recipients: {
+            $all: [{ $elemMatch: { $eq: from } }, { $elemMatch: { $eq: to } }],
+          },
+        },
+        {
+          recipients: [from, to],
+          lastMessage: req.body.text,
+          date: Date.now(),
+        },
+        { upsert: true, new: true, setDefaultsOnInsert: true }
+      );
 
       const newMessage = new Message({
         conversation: conversation._id,
@@ -57,12 +60,8 @@ router.post('/', auth, async (req, res) => {
 
       res.json(message);
     } else {
-      console.log('found conversation');
       const conversation = await Conversation.findOneAndUpdate(
         {
-          // recipients: {
-          //   $all: [{ $elemMatch: { $eq: from } }, { $elemMatch: { $eq: to } }],
-          // },
           recipients: {
             $all: [from, to],
           },
@@ -74,6 +73,7 @@ router.post('/', auth, async (req, res) => {
         },
         { upsert: true, setDefaultsOnInsert: true }
       );
+
       const newMessage = new Message({
         conversation: conversation._id,
         to,
@@ -85,27 +85,6 @@ router.post('/', auth, async (req, res) => {
 
       res.json(message);
     }
-
-    // res.json(conversation);
-    // const conversation = await Conversation.findOneAndUpdate(
-    //   {
-    //     recipients: {
-    //       $all: [{ $elemMatch: { $eq: from } }, { $elemMatch: { $eq: to } }],
-    //     },
-    //     recipients: {
-    //       $all: [from, to],
-    //     },
-    //   },
-    //   {
-    //     recipients: [from, to],
-    //     lastMessage: req.body.text,
-    //     date: Date.now(),
-    //   },
-    //   { upsert: true, new: true, setDefaultsOnInsert: true }
-    //   { upsert: true, setDefaultsOnInsert: true }
-    // );
-
-    // res.json(newMessage);
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Server Error');
