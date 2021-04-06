@@ -4,6 +4,8 @@ import React, {
   Switch,
 } from 'react-router-dom';
 import './App.css';
+
+// COMPONENTS
 import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
 import Login from './components/auth/Login';
