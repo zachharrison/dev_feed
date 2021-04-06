@@ -9,20 +9,26 @@ import Landing from './components/layout/Landing';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 
+// REDUX
+import { Provider } from 'react-redux';
+import store from './store';
+
 const App = () => {
   return (
-    <Router>
-      <>
-        <Navbar />
-        <Route exact path='/' component={Landing} />
-        <section className='container container-center'>
-          <Switch>
-            <Route exact path='/register' component={Register} />
-            <Route exact path='/login' component={Login} />
-          </Switch>
-        </section>
-      </>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <>
+          <Navbar />
+          <Route exact path='/' component={Landing} />
+          <section className='container container-center'>
+            <Switch>
+              <Route exact path='/register' component={Register} />
+              <Route exact path='/login' component={Login} />
+            </Switch>
+          </section>
+        </>
+      </Router>
+    </Provider>
   );
 };
 
