@@ -1,11 +1,11 @@
 import './App.css';
-
+import Navbar from './components/layout/Navbar';
+import Landing from './components/layout/Landing';
 const App = () => {
   return (
     <>
-      <h1>
-        Hello World <i className='fas fa-code'></i>
-      </h1>
+      <Navbar />
+      <Landing />
     </>
   );
 };
