@@ -3,7 +3,7 @@ const config = require('config');
 
 module.exports = function (req, res, next) {
   // GET TOKEN FROM HEADER
-  const token = req.query['x-auth-token'];
+  const token = req.headers['x-auth-token'];
 
   // CHECK IF THERE IS NOT A TOKEN
   if (!token) {
