@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const config = require('config');
 
-module.exports = (req, res, next) => {
+module.exports = function (req, res, next) {
   // GET TOKEN FROM HEADER
   const token = req.query['x-auth-token'];
 
@@ -20,7 +20,7 @@ module.exports = (req, res, next) => {
         next();
       }
     });
-  } catch (err) {
+  } catch (error) {
     console.error('something wrong with auth middleware');
     res.status(500).json({ msg: 'Server Error' });
   }
