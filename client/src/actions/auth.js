@@ -23,7 +23,6 @@ export const loadUser = () => async (dispatch) => {
       payload: res.data,
     });
   } catch (error) {
-    // GETTING 504 GATEWAY TIMEOUT
     dispatch({
       type: AUTH_ERROR,
     });
