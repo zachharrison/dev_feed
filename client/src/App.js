@@ -17,6 +17,8 @@ import ProfileForm from './components/profile-forms/ProfileForm';
 import { Provider } from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/auth';
+import AddEducation from './components/profile-forms/AddEducation';
+import AddExperience from './components/profile-forms/AddExperience';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -48,6 +50,11 @@ const App = () => {
                 exact
                 path='/edit-profile'
                 component={ProfileForm}
+              />
+              <PrivateRoute
+                exact
+                path='/add-experience'
+                component={AddExperience}
               />
             </Switch>
           </section>
