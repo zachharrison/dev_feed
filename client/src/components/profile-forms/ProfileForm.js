@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getCurrentProfile } from '../../actions/profile';
+import { getCurrentProfile, createProfile } from '../../actions/profile';
 
 const initialState = {
   company: '',
@@ -21,6 +21,7 @@ const initialState = {
 
 const ProfileForm = ({
   profile: { profile, loading },
+  createProfile,
   getCurrentProfile,
   history,
 }) => {
@@ -73,7 +74,7 @@ const ProfileForm = ({
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log('SUBMIT');
+    createProfile(formData, history, profile ? true : false);
   };
 
   return (
@@ -253,6 +254,7 @@ const ProfileForm = ({
 
 ProfileForm.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
+  createProfile: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
 };
 
@@ -260,4 +262,6 @@ const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export default connect(mapStateToProps, { getCurrentProfile })(ProfileForm);
+export default connect(mapStateToProps, { getCurrentProfile, createProfile })(
+  ProfileForm
+);
