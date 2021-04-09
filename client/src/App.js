@@ -12,13 +12,13 @@ import Register from './components/auth/Register';
 import Dashboard from './components/dashboard/Dashboard';
 import PrivateRoute from './components/routing/PrivateRoute';
 import ProfileForm from './components/profile-forms/ProfileForm';
+import AddEducation from './components/profile-forms/AddEducation';
+import AddExperience from './components/profile-forms/AddExperience';
 
 // REDUX
 import { Provider } from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/auth';
-import AddEducation from './components/profile-forms/AddEducation';
-import AddExperience from './components/profile-forms/AddExperience';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -55,6 +55,11 @@ const App = () => {
                 exact
                 path='/add-experience'
                 component={AddExperience}
+              />
+              <PrivateRoute
+                exact
+                path='/add-education'
+                component={AddEducation}
               />
             </Switch>
           </section>
