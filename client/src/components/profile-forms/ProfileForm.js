@@ -36,7 +36,7 @@ const ProfileForm = ({
 
       for (const key in profile) {
         if (key in profileData) {
-          profileData[key] = profile.social[key];
+          profileData[key] = profile[key];
         }
       }
 
