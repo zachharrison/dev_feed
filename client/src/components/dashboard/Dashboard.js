@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import DashboardLinks from './DashboardLinks';
 import { getCurrentProfile } from '../../actions/profile';
 import Spinner from '../layout/Spinner';
+import Experience from './Experience';
 
 const Dashboard = ({
   getCurrentProfile,
@@ -26,6 +27,7 @@ const Dashboard = ({
       {profile !== null ? (
         <>
           <DashboardLinks />
+          <Experience experience={profile.experience} />
           <div className='my-2'>
             <button className='btn btn-danger'>
               <i className='fas fa-user-minus' /> Delete My Account
