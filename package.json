@@ -30,6 +30,7 @@
     "http-proxy-middleware": "^1.1.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.2",
+    "multer": "^1.4.2",
     "normalize-url": "^5.3.0",
     "uuid": "^8.3.2"
   },

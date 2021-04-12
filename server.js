@@ -6,6 +6,7 @@ const authRoutes = require('./routes/api/auth');
 const profileRoutes = require('./routes/api/profile');
 const postRoutes = require('./routes/api/posts');
 const messageRoutes = require('./routes/api/messages');
+const uploadRoutes = require('./routes/api/upload');
 
 const app = express();
 
@@ -24,5 +25,6 @@ app.use('/api/auth', authRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/messages', messageRoutes);
+app.use('/api/upload', uploadRoutes);
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
