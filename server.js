@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const connectDB = require('./config/db');
 
 const userRoutes = require('./routes/api/users');
@@ -26,5 +27,7 @@ app.use('/api/profile', profileRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/messages', messageRoutes);
 app.use('/api/upload', uploadRoutes);
+
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
