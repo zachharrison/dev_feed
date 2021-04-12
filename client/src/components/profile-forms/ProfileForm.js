@@ -29,8 +29,6 @@ const ProfileForm = ({
 }) => {
   const [formData, setFormData] = useState(initialState);
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
-  const [uploading, setUploading] = useState(false);
-  // const [image, setImage] = useState('');
 
   useEffect(() => {
     if (!profile) getCurrentProfile();
@@ -61,7 +59,6 @@ const ProfileForm = ({
     const file = e.target.files[0];
     const imageData = new FormData();
     imageData.append('image', file);
-    setUploading(true);
 
     try {
       const config = {
@@ -73,10 +70,8 @@ const ProfileForm = ({
       const { data } = await axios.post('/api/upload', imageData, config);
 
       setFormData({ ...formData, image: data });
-      setUploading(false);
     } catch (error) {
       console.error(error);
-      setUploading(false);
     }
   };
 

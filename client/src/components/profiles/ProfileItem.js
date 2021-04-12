@@ -13,7 +13,12 @@ const ProfileItem = ({
 }) => {
   return (
     <div className='profile bg-light'>
-      <img src={image} height='200' alt='' className='round-img' />
+      <img
+        src={image || './blank_avatar.jpg'}
+        height='200'
+        alt=''
+        className='round-img'
+      />
       <div>
         <h2>{name}</h2>
         <p>
