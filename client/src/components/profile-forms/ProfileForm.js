@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { connect } from 'react-redux';
 import { getCurrentProfile, createProfile } from '../../actions/profile';
 
 const initialState = {
+  image: '',
   company: '',
   website: '',
   location: '',
@@ -26,8 +28,9 @@ const ProfileForm = ({
   history,
 }) => {
   const [formData, setFormData] = useState(initialState);
-
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  // const [image, setImage] = useState('');
 
   useEffect(() => {
     if (!profile) getCurrentProfile();
@@ -54,7 +57,31 @@ const ProfileForm = ({
     }
   }, [loading, getCurrentProfile, profile]);
 
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const imageData = new FormData();
+    imageData.append('image', file);
+    setUploading(true);
+
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+
+      const { data } = await axios.post('/api/upload', imageData, config);
+
+      setFormData({ ...formData, image: data });
+      setUploading(false);
+    } catch (error) {
+      console.error(error);
+      setUploading(false);
+    }
+  };
+
   const {
+    image,
     company,
     website,
     location,
@@ -103,6 +130,22 @@ const ProfileForm = ({
           <small className='form-text'>
             Give us an idea of where you are at in your career
           </small>
+        </div>
+        <div className='form-group'>
+          <input
+            type='text'
+            placeholder='Enter Image URL'
+            name='image'
+            value={image}
+            onChange={onChange}
+          />
+        </div>
+        <div className='form-group'>
+          <input
+            type='file'
+            placeholder='Choose File'
+            onChange={uploadFileHandler}
+          />
         </div>
         <div className='form-group'>
           <input
