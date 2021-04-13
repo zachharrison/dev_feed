@@ -14,7 +14,7 @@ const PostItem = ({
   showActions,
 }) => {
   return (
-    <div className='post bg-white p-1 my-1'>
+    <div className='post bg-light p-1 my-1'>
       <div>
         <Link to={`/profile/${user}`}>
           <img src={image} alt='profile' className='round-img' />
@@ -26,22 +26,22 @@ const PostItem = ({
         <p className='post-date mb-2'>Posted on {formatDate(date)}</p>
         {showActions && (
           <>
-            <button type='button' className='btn btn-light'>
+            <button type='button' className='btn btn-dark'>
               <i className='fas fa-thumbs-up' />{' '}
               <span>{likes.length > 0 && <span>{likes.length}</span>}</span>
             </button>
-            <button type='button' className='btn btn-light'>
+            <button type='button' className='btn btn-dark'>
               <i className='fas fa-thumbs-down' />
             </button>
             <Link to={`/posts/${_id}`} className='btn btn-primary'>
-              {comments.length > 0 ? 'Comments' : 'Comment'}{' '}
+              <i className='fas fa-comments' />{' '}
               {comments.length > 0 && (
                 <span className='comment-count'>{comments.length}</span>
               )}
             </Link>
             {!auth.loading && user === auth.user._id && (
               <button type='button' className='btn btn-danger'>
-                Delete your post <i className='fas fa-times' />
+                <i className='fas fa-trash' />
               </button>
             )}
           </>
