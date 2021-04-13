@@ -10,18 +10,49 @@ const PostItem = ({
   // removeLike,
   // deletePost,
   auth,
-  post: { _id, text, name, user, likes, comments, date },
+  post: { _id, text, name, user, likes, comments, date, image },
+  showActions,
 }) => {
   return (
     <div className='post bg-white p-1 my-1'>
       <div>
         <Link to={`/profile/${user}`}>
-          {/* <img src={image} alt='profile' className='round-img' /> */}
+          <img src={image} alt='profile' className='round-img' />
           <h4>{name}</h4>
         </Link>
       </div>
+      <div>
+        <p className='my-1'>{text}</p>
+        <p className='post-date mb-2'>Posted on {formatDate(date)}</p>
+        {showActions && (
+          <>
+            <button type='button' className='btn btn-light'>
+              <i className='fas fa-thumbs-up' />{' '}
+              <span>{likes.length > 0 && <span>{likes.length}</span>}</span>
+            </button>
+            <button type='button' className='btn btn-light'>
+              <i className='fas fa-thumbs-down' />
+            </button>
+            <Link to={`/posts/${_id}`} className='btn btn-primary'>
+              {comments.length > 0 ? 'Comments' : 'Comment'}{' '}
+              {comments.length > 0 && (
+                <span className='comment-count'>{comments.length}</span>
+              )}
+            </Link>
+            {!auth.loading && user === auth.user._id && (
+              <button type='button' className='btn btn-danger'>
+                Delete your post <i className='fas fa-times' />
+              </button>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
+};
+
+PostItem.defaultProps = {
+  showActions: true,
 };
 
 PostItem.propTypes = {
