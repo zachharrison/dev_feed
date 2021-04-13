@@ -2,6 +2,9 @@
 .m-1 {
   margin: 1rem;
 }
+.mx-1 {
+  margin: 0 1rem;
+}
 .my-1 {
   margin: 1rem 0;
 }
@@ -75,7 +78,7 @@
   padding: 5rem 0;
 }
 .container {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: auto;
   overflow: hidden;
   padding: 0 2rem;
@@ -256,6 +259,10 @@
   background-color: #000;
   color: #fff;
 }
+.badge.badge-white {
+  background-color: #fff;
+  color: #000;
+}
 .badge.badge-success {
   background-color: #25d366;
   color: #fff;
@@ -372,6 +379,15 @@
 }
 .form .social-input i.fa-linkedin {
   color: #0077b5;
+}
+.profiles-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+@media (min-width: 700px) and (max-width: 1300px) {
+  .container {
+    max-width: 1000px;
+  }
 }
 @media (max-width: 700px) {
   .badge {
@@ -558,13 +574,13 @@ img {
 .profile {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 2fr 4fr 2fr;
-  grid-template-columns: 2fr 4fr 2fr;
-  grid-gap: 2rem;
+  -ms-grid-columns: 2fr 5fr 3fr;
+  grid-template-columns: 2fr 5fr 3fr;
+  grid-gap: 1rem;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  padding: 1rem;
+  padding: 1rem 2rem;
   line-height: 1.8;
   border-radius: 1rem;
   margin-bottom: 1rem;
