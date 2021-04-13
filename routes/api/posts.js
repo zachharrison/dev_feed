@@ -6,6 +6,7 @@ const checkObjectId = require('../../middleware/checkObjectId');
 
 const Post = require('../../models/Post');
 const User = require('../../models/User');
+const Profile = require('../../models/Profile');
 
 // @DESC      CREATE A NEW POST
 // @ROUTE     POST /api/posts
@@ -22,11 +23,12 @@ router.post(
 
     try {
       const user = await User.findById(req.user.id).select('-password');
+      const profile = await Profile.find({ user: req.user.id }).select('image');
 
       const newPost = new Post({
         text: req.body.text,
         name: user.name,
-        avatar: user.avatar,
+        image: profile[0].image,
         user: req.user.id,
       });
 
