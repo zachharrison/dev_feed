@@ -437,6 +437,10 @@
     height: 100px;
     margin: 0 auto;
   }
+  .profile-grid .profile-top img {
+    width: 250px;
+    height: 250px;
+  }
   .profiles .profile ul {
     display: none;
   }
@@ -487,8 +491,8 @@ ul {
   list-style: none;
 }
 img {
-  height: 150px;
   width: 150px;
+  height: 150px;
 }
 .navbar {
   display: -webkit-box;
@@ -589,7 +593,8 @@ img {
   border-radius: 1rem;
 }
 .profile-grid .profile-top img {
-  width: 250px;
+  width: 350px;
+  height: 350px;
 }
 .profile-grid .profile-top .icons a {
   color: #fff;
