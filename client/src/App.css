@@ -643,10 +643,10 @@ img {
   padding-bottom: 1rem;
   border-bottom: #ccc 1px dotted;
 }
-.profile-grid .profile-exp:last-child,
+/* .profile-grid .profile-exp:last-child,
 .profile-grid .profile-edu:last-child {
   border: none;
-}
+} */
 .profile-grid .profile-exp p,
 .profile-grid .profile-edu p {
   margin: 0.5rem 0;
