@@ -3,6 +3,7 @@ import {
   GET_POSTS,
   POST_ERROR,
   UPDATE_LIKES,
+  ADD_POST,
 } from '../actions/constants';
 
 const initialState = {
@@ -41,6 +42,11 @@ export default function postReducer(state = initialState, action) {
         ...state,
         posts: state.posts.filter((post) => post._id !== payload),
         loading: false,
+      };
+    case ADD_POST:
+      return {
+        ...state,
+        posts: [payload, ...state.posts],
       };
     default:
       return state;

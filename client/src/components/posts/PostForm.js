@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { addPost } from '../../actions/post';
 
-const PostForm = (props) => {
+const PostForm = ({ addPost }) => {
+  const [text, setText] = useState('');
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    addPost({ text });
+    setText('');
+  };
+
   return (
     <div className='post-form'>
-      <form className='form my-1'>
+      <form onSubmit={onSubmit} className='form my-1'>
         <div className='form-group'>
           <textarea
             cols='30'
             rows='1'
             placeholder="What's on your mind?"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
           ></textarea>
           <input
             type='submit'
@@ -22,6 +34,8 @@ const PostForm = (props) => {
   );
 };
 
-PostForm.propTypes = {};
+PostForm.propTypes = {
+  addPost: PropTypes.func.isRequired,
+};
 
-export default PostForm;
+export default connect(null, { addPost })(PostForm);
