@@ -1,4 +1,9 @@
-import { GET_POSTS, POST_ERROR, UPDATE_LIKES } from '../actions/constants';
+import {
+  DELETE_POST,
+  GET_POSTS,
+  POST_ERROR,
+  UPDATE_LIKES,
+} from '../actions/constants';
 
 const initialState = {
   posts: [],
@@ -29,6 +34,12 @@ export default function postReducer(state = initialState, action) {
         posts: state.posts.map((post) =>
           payload.postId === post._id ? { ...post, likes: payload.likes } : post
         ),
+        loading: false,
+      };
+    case DELETE_POST:
+      return {
+        ...state,
+        posts: state.posts.filter((post) => post._id !== payload),
         loading: false,
       };
     default:
