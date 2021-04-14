@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import formatDate from '../../utils/formatDate';
 import { connect } from 'react-redux';
-// import { addLike, removeLike, deletePost } from '../../actions/post';
+import { addLike, removeLike } from '../../actions/post';
 
 const PostItem = ({
-  // addLike,
-  // removeLike,
-  // deletePost,
+  addLike,
+  removeLike,
   auth,
   post: { _id, text, name, user, likes, comments, date, image },
   showActions,
@@ -26,11 +25,19 @@ const PostItem = ({
         <p className='post-date mb-2'>Posted on {formatDate(date)}</p>
         {showActions && (
           <>
-            <button type='button' className='btn btn-dark'>
+            <button
+              onClick={(e) => addLike(_id)}
+              type='button'
+              className='btn btn-dark'
+            >
               <i className='fas fa-thumbs-up' />{' '}
               <span>{likes.length > 0 && <span>{likes.length}</span>}</span>
             </button>
-            <button type='button' className='btn btn-dark'>
+            <button
+              onClick={(e) => removeLike(_id)}
+              type='button'
+              className='btn btn-dark'
+            >
               <i className='fas fa-thumbs-down' />
             </button>
             <Link to={`/posts/${_id}`} className='btn btn-primary'>
@@ -58,9 +65,8 @@ PostItem.defaultProps = {
 PostItem.propTypes = {
   post: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  // addLike: PropTypes.func.isRequired,
-  // removeLike: PropTypes.func.isRequired,
-  // deletePost: PropTypes.func.isRequired,
+  addLike: PropTypes.func.isRequired,
+  removeLike: PropTypes.func.isRequired,
   showActions: PropTypes.bool,
 };
 
@@ -69,7 +75,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  // addLike,
-  // removeLike,
-  // deletePost,
+  addLike,
+  removeLike,
 })(PostItem);
