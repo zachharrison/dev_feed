@@ -417,6 +417,12 @@
   .form .form-group input {
     width: 100%;
   }
+  /* .post-form {
+    width: 100px;
+  } */
+  .post-form .form {
+    margin: 0;
+  }
   .navbar {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -699,8 +705,9 @@ img {
   -ms-flex-preferred-size: 20%;
   flex-basis: 20%;
 }
-.post-form .form {
+.post-form {
   margin: auto;
+  width: 600px;
 }
 .post-form .form .form-group textarea,
 .post-form .form input {
