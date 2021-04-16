@@ -5,15 +5,14 @@ import { getConversations } from '../../actions/messenger';
 import Conversations from './Conversations';
 import Conversation from './Conversation';
 
-const Messenger = ({ getConversations, conversations, match }) => {
+const Messenger = ({ getConversations, messenger: { conversations } }) => {
   useEffect(() => {
     getConversations();
-  }, []);
+  }, [getConversations]);
 
-  console.log(conversations);
   return (
     <div className='chat-container'>
-      <Conversations />
+      <Conversations conversations={conversations} />
       <Conversation />
     </div>
   );
@@ -21,10 +20,10 @@ const Messenger = ({ getConversations, conversations, match }) => {
 
 Messenger.propTypes = {
   getConversations: PropTypes.func.isRequired,
-  conversations: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  messenger: state.messenger,
   conversations: state.conversations,
 });
 
