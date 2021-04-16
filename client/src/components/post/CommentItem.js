@@ -13,7 +13,7 @@ const CommentItem = ({
     <div className='container-center'>
       <img src={image} alt='' />
       <small>
-        <p>{name}</p>
+        <p className='text-center'>{name}</p>
       </small>
     </div>
     <p className='comment-text'>{text}</p>
