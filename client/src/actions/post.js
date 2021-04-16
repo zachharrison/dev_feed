@@ -144,7 +144,7 @@ export const addComment = (postId, formData) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     };
-    const res = await axios.post(
+    const res = await axios.put(
       `/api/posts/comment/${postId}`,
       formData,
       config

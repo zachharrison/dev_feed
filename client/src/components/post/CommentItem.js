@@ -9,7 +9,7 @@ const CommentItem = ({
   comment: { _id, text, name, user, image, date },
   auth,
 }) => (
-  <div className='comment'>
+  <div className='comment mb-2'>
     <div className='container-center'>
       <img src={image} alt='' />
       <small>

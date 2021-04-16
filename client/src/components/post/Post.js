@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import { getPost } from '../../actions/post';
-import PostItem from '../posts/PostItem';
 import CommentForm from './CommentForm';
 import PostFocus from './PostFocus';
 import CommentItem from './CommentItem';
@@ -21,7 +20,7 @@ const Post = ({ getPost, post: { post, loading }, match }) => {
       <Link to='/posts' className='btn'>
         Back To Posts
       </Link>
-      <PostFocus post={post} showActions={false}>
+      <PostFocus post={post}>
         <CommentForm postId={post._id} />
         {post.comments.map((comment) => (
           <CommentItem key={comment._id} comment={comment} postId={post._id} />
