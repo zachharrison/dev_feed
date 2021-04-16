@@ -23,9 +23,9 @@ const PostItem = ({
       </div>
       <div>
         <p className='my-1'>{text}</p>
-        <p className='post-date mb-2'>Posted on {formatDate(date)}</p>
+        <small className='post-date mb-1'>Posted on {formatDate(date)}</small>
         {showActions && (
-          <>
+          <div className='mt-2'>
             <button
               onClick={(e) => addLike(_id)}
               type='button'
@@ -56,7 +56,7 @@ const PostItem = ({
                 <i className='fas fa-trash' />
               </button>
             )}
-          </>
+          </div>
         )}
       </div>
     </div>

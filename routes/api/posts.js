@@ -162,11 +162,12 @@ router.put(
     try {
       const user = await User.findById(req.user.id).select('-password');
       const post = await Post.findById(req.params.id);
+      const profile = await Profile.find({ user: req.user.id }).select('image');
 
       const newComment = {
         text: req.body.text,
         name: user.name,
-        avatar: user.avatar,
+        image: profile[0].image,
         user: req.user.id,
       };
 
