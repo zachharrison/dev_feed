@@ -96,7 +96,6 @@ router.get('/conversations', auth, async (req, res) => {
         },
       },
     ]).match({ recipients: { $all: [{ $elemMatch: { $eq: from } }] } });
-
     res.json(conversations);
   } catch (error) {
     console.error(error.message);
