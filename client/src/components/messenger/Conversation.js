@@ -1,7 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const Conversation = (props) => {
+const Conversation = () => {
   return (
     <div className='conversation'>
       <div className='messages'>
@@ -64,6 +63,6 @@ const Conversation = (props) => {
   );
 };
 
-Conversation.propTypes = {};
+// Conversation.propTypes = {};
 
 export default Conversation;

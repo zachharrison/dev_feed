@@ -10,11 +10,16 @@ const Conversations = ({
   messenger: { conversation, conversations },
 }) => {
   const [active, setActive] = useState(false);
+  const [text, setText] = useState('');
 
   const handleClick = (id) => {
     setActive(id);
-
     getConversation(id);
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log(text);
   };
 
   useEffect(() => {
@@ -52,13 +57,15 @@ const Conversations = ({
             ))}
           </ul>
         </div>
-        <div className='message-input-container'>
+        <form onSubmit={onSubmit} className='message-input-container'>
           <input
             type='text'
+            value={text}
+            onChange={(e) => setText(e.target.value)}
             className='message-input'
             placeholder='Type your message here'
           />
-        </div>
+        </form>
       </div>
     </>
   );
@@ -66,8 +73,7 @@ const Conversations = ({
 
 Conversations.propTypes = {
   auth: PropTypes.object.isRequired,
-  conversations: PropTypes.array.isRequired,
-  conversation: PropTypes.array.isRequired,
+  messenger: PropTypes.object.isRequired,
   getConversations: PropTypes.func.isRequired,
   getConversation: PropTypes.func.isRequired,
 };
