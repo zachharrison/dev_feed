@@ -16,9 +16,8 @@ const Profile = require('../../models/Profile');
 router.post('/', auth, async (req, res) => {
   const from = await User.findOne({ _id: req.body.from }).select('name');
   const to = await User.findOne({ _id: req.body.to }).select('name');
-
-  console.log('FROM TEST', from);
-  console.log('TO TEST', to);
+  // console.log('FROM TEST', from);
+  // console.log('TO TEST', to);
   try {
     const conversation = await Conversation.findOne({
       recipients: {
@@ -100,27 +99,27 @@ router.post('/', auth, async (req, res) => {
 // @ACCESS    PRIVATE
 router.get('/conversations', auth, async (req, res) => {
   const from = mongoose.Types.ObjectId(req.user.id);
-  // const from = await User.findOne({ _id: req.user.id }).select('name');
-  // const image = await Profile.findOne({ _id: req.user.id });
-  // from['image'] = image;
   console.log('test', from);
   try {
-    const conversations = await Conversation.aggregate([
-      {
-        $lookup: {
-          from: 'user',
-          localField: 'recipients',
-          foreignField: '_id',
-          as: 'recipientObj',
+    // const conversations = await Conversation.aggregate([
+    //   {
+    //     $lookup: {
+    //       from: 'user',
+    //       localField: '_id',
+    //       foreignField: 'recipients[1]._id',
+    //       as: 'recipientObj',
+    //     },
+    //   },
+    // ]).match({ recipients: { $all: [{ $elemMatch: { $eq: from } }] } });
+
+    const conversations = await Conversation.find({
+      recipients: {
+        $elemMatch: {
+          _id: from,
         },
       },
-    ]).match({ recipients: { $all: [{ $elemMatch: { $eq: from } }] } });
+    });
 
-    // const conversations = await Conversation.find({ recipients: from._id });
-
-    // const conversations = await Conversation.find({
-    //   recipients: { $all: [{ $elemMatch: { $eq: from._id } }] },
-    // });
     console.log('THE CONVERSATIONS ARE', conversations);
     res.json(conversations);
   } catch (error) {
