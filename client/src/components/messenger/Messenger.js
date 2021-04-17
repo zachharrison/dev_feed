@@ -5,26 +5,13 @@ import { getConversations } from '../../actions/messenger';
 import Conversations from './Conversations';
 import Conversation from './Conversation';
 
-const Messenger = ({ getConversations, messenger: { conversations } }) => {
-  useEffect(() => {
-    getConversations();
-  }, [getConversations]);
-
+const Messenger = () => {
   return (
     <div className='chat-container'>
-      <Conversations conversations={conversations} />
-      <Conversation />
+      <Conversations />
+      {/* <Conversation /> */}
     </div>
   );
 };
 
-Messenger.propTypes = {
-  getConversations: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  messenger: state.messenger,
-  conversations: state.conversations,
-});
-
-export default connect(mapStateToProps, { getConversations })(Messenger);
+export default Messenger;

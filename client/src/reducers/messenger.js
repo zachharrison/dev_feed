@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   conversations: [],
-  conversation: null,
+  conversation: [],
   loading: true,
   error: {},
 };

@@ -837,7 +837,6 @@ img {
 .conversation-items .conversation-item {
   width: 100%;
   height: 100px;
-  background-color: #fafafa;
   border-bottom: solid 1px #e0e0e0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -915,6 +914,9 @@ img {
   font-size: 16px;
   border: none;
   outline: none;
+}
+.conversation-item.active {
+  background-color: #eeeeee;
 }
 .messages {
   margin: 0 4rem;
