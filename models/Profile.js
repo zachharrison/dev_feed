@@ -1,4 +1,3 @@
-const { json } = require('express');
 const mongoose = require('mongoose');
 
 const ProfileSchema = new mongoose.Schema({

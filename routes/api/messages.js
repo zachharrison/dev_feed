@@ -7,14 +7,18 @@ const checkObjectId = require('../../middleware/checkObjectId');
 
 const Message = require('../../models/Message');
 const Conversation = require('../../models/Conversation');
+const User = require('../../models/User');
+const Profile = require('../../models/Profile');
 
 // @DESC      CREATE A NEW MESSAGE
 // @ROUTE     POST /api/messages
 // @ACCESS    PRIVATE
 router.post('/', auth, async (req, res) => {
-  const from = req.body.from;
-  const to = req.body.to;
+  const from = await User.findOne({ _id: req.body.from }).select('name');
+  const to = await User.findOne({ _id: req.body.to }).select('name');
 
+  console.log('FROM TEST', from);
+  console.log('TO TEST', to);
   try {
     const conversation = await Conversation.findOne({
       recipients: {
@@ -23,19 +27,31 @@ router.post('/', auth, async (req, res) => {
     });
 
     if (!conversation) {
-      const conversation = await Conversation.findOneAndUpdate(
-        {
-          recipients: {
-            $all: [{ $elemMatch: { $eq: from } }, { $elemMatch: { $eq: to } }],
-          },
-        },
-        {
-          recipients: [from, to],
-          lastMessage: req.body.text,
-          date: Date.now(),
-        },
-        { upsert: true, new: true, setDefaultsOnInsert: true }
-      );
+      // const conversation = await Conversation.findOneAndUpdate(
+      //   {
+      //     recipients: {
+      //       $all: [{ $elemMatch: { $eq: from } }, { $elemMatch: { $eq: to } }],
+      //     },
+      //   },
+      //   {
+      //     recipients: [from, to], // REMOVE ID AND JUST LEAVE THE OBJECT
+      //     lastMessage: req.body.text,
+      //     date: Date.now(),
+      //   },
+      //   { upsert: true, new: true, setDefaultsOnInsert: true }
+      // );
+
+      const recipients = [to, from];
+
+      const newConversation = new Conversation({
+        recipients,
+        lastMessage: req.body.text,
+        date: Date.now(),
+      });
+
+      console.log(newConversation);
+
+      const conversation = await newConversation.save();
 
       const newMessage = new Message({
         conversation: conversation._id,
@@ -84,7 +100,10 @@ router.post('/', auth, async (req, res) => {
 // @ACCESS    PRIVATE
 router.get('/conversations', auth, async (req, res) => {
   const from = mongoose.Types.ObjectId(req.user.id);
-
+  // const from = await User.findOne({ _id: req.user.id }).select('name');
+  // const image = await Profile.findOne({ _id: req.user.id });
+  // from['image'] = image;
+  console.log('test', from);
   try {
     const conversations = await Conversation.aggregate([
       {
@@ -96,6 +115,13 @@ router.get('/conversations', auth, async (req, res) => {
         },
       },
     ]).match({ recipients: { $all: [{ $elemMatch: { $eq: from } }] } });
+
+    // const conversations = await Conversation.find({ recipients: from._id });
+
+    // const conversations = await Conversation.find({
+    //   recipients: { $all: [{ $elemMatch: { $eq: from._id } }] },
+    // });
+    console.log('THE CONVERSATIONS ARE', conversations);
     res.json(conversations);
   } catch (error) {
     console.error(error.message);

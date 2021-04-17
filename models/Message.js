@@ -7,12 +7,28 @@ const MessageSchema = new Schema({
     ref: 'conversations',
   },
   to: {
-    type: Schema.Types.ObjectId,
-    ref: 'user',
+    _id: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
   },
+  // from: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'user',
+  // },
   from: {
-    type: Schema.Types.ObjectId,
-    ref: 'user',
+    _id: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
   },
   text: {
     type: String,

@@ -8,7 +8,7 @@ const Conversations = ({ conversations }) => {
         {conversations.map((conversation) => (
           <div key={conversation._id} className='conversation-item'>
             <div className='desc-contact'>
-              <p className='name'>{conversation.recipients[0]}</p>
+              <p className='name'>{conversation.recipients[0].name}</p>
               <p className='message'>{conversation.lastMessage} </p>
             </div>
           </div>
