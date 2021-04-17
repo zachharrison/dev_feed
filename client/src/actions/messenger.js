@@ -24,3 +24,25 @@ export const getConversations = () => async (dispatch) => {
     });
   }
 };
+
+// GET MESSAGES FROM A CONVERSATION
+export const getConversation = (conversationId) => async (dispatch) => {
+  try {
+    const res = await axios.get(
+      `/api/messages/conversations/${conversationId}`
+    );
+
+    dispatch({
+      type: GET_CONVERSATION,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: MESSENGER_ERROR,
+      payload: {
+        msg: error.response.statusText,
+        status: error.response.status,
+      },
+    });
+  }
+};

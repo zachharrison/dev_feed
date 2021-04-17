@@ -21,6 +21,12 @@ export default function messengerReducer(state = initialState, action) {
         conversations: payload,
         loading: false,
       };
+    case GET_CONVERSATION:
+      return {
+        ...state,
+        conversation: payload,
+        loading: false,
+      };
     case MESSENGER_ERROR:
       return {
         ...state,
