@@ -99,7 +99,6 @@ router.post('/', auth, async (req, res) => {
 // @ACCESS    PRIVATE
 router.get('/conversations', auth, async (req, res) => {
   const from = mongoose.Types.ObjectId(req.user.id);
-  console.log('test', from);
   try {
     // const conversations = await Conversation.aggregate([
     //   {
@@ -120,7 +119,6 @@ router.get('/conversations', auth, async (req, res) => {
       },
     });
 
-    // console.log('THE CONVERSATIONS ARE', conversations);
     res.json(conversations);
   } catch (error) {
     console.error(error.message);

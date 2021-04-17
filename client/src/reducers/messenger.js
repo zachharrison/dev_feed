@@ -1,6 +1,7 @@
 import {
   GET_CONVERSATIONS,
   GET_CONVERSATION,
+  NEW_MESSAGE,
   MESSENGER_ERROR,
 } from '../actions/constants';
 
@@ -26,6 +27,11 @@ export default function messengerReducer(state = initialState, action) {
         ...state,
         conversation: payload,
         loading: false,
+      };
+    case NEW_MESSAGE:
+      return {
+        ...state,
+        conversation: [...state.conversation, payload],
       };
     case MESSENGER_ERROR:
       return {
