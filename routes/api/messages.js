@@ -120,7 +120,7 @@ router.get('/conversations', auth, async (req, res) => {
       },
     });
 
-    console.log('THE CONVERSATIONS ARE', conversations);
+    // console.log('THE CONVERSATIONS ARE', conversations);
     res.json(conversations);
   } catch (error) {
     console.error(error.message);
