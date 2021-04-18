@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getConversation, getConversations } from '../../actions/messenger';
+import {
+  getConversation,
+  getConversations,
+  newMessage,
+} from '../../actions/messenger';
 
 const Conversations = ({
   auth: { user },
+  newMessage,
   getConversations,
   getConversation,
   messenger: { conversation, conversations },
@@ -19,7 +24,22 @@ const Conversations = ({
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(text);
+    let to;
+    let from;
+
+    if (conversation[0].to._id !== user._id) {
+      to = conversation[0].to._id;
+      from = conversation[0].from._id;
+    } else {
+      to = conversation[0].from._id;
+      from = conversation[0].to_id;
+    }
+
+    newMessage({ from, to, text });
+
+    setText('');
+
+    console.log(`The message is sent from user id ${from} to user id ${to}`);
   };
 
   useEffect(() => {
@@ -74,6 +94,7 @@ const Conversations = ({
 Conversations.propTypes = {
   auth: PropTypes.object.isRequired,
   messenger: PropTypes.object.isRequired,
+  newMessage: PropTypes.func.isRequired,
   getConversations: PropTypes.func.isRequired,
   getConversation: PropTypes.func.isRequired,
 };
@@ -85,6 +106,8 @@ const mapStateToProps = (state) => ({
   conversation: state.conversation,
 });
 
-export default connect(mapStateToProps, { getConversation, getConversations })(
-  Conversations
-);
+export default connect(mapStateToProps, {
+  getConversation,
+  getConversations,
+  newMessage,
+})(Conversations);
