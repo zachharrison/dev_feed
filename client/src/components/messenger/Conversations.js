@@ -14,21 +14,16 @@ const Conversations = ({
   getConversation,
   messenger: { conversation, conversations },
 }) => {
-  useEffect(() => {
-    getConversations();
-  }, [getConversations, getConversation]);
-
-  const [active, setActive] = useState('');
+  const [active, setActive] = useState(
+    conversations.length ? conversations[0]._id : ''
+  );
   const [text, setText] = useState('');
 
   const handleClick = (id) => {
     setActive(id);
     getConversation(id);
   };
-  console.log('Conversation from state', conversation);
-  console.log('Active Conversation from state', active);
-  console.log('Conversations from state', conversations);
-  console.log('user id from state', user._id);
+
   const onSubmit = (e) => {
     e.preventDefault();
     let to;
@@ -53,6 +48,16 @@ const Conversations = ({
 
     console.log(`The message is sent from user id ${from} to user id ${to}`);
   };
+
+  useEffect(() => {
+    if (conversations.length) {
+      getConversation(conversations[0]._id);
+    }
+  }, []);
+
+  useEffect(() => {
+    getConversations();
+  }, [getConversations]);
 
   return (
     <>
