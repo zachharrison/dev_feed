@@ -14,7 +14,11 @@ const Conversations = ({
   getConversation,
   messenger: { conversation, conversations },
 }) => {
-  const [active, setActive] = useState(conversations[0]._id);
+  useEffect(() => {
+    getConversations();
+  }, [getConversations, getConversation]);
+
+  const [active, setActive] = useState('');
   const [text, setText] = useState('');
 
   const handleClick = (id) => {
@@ -30,6 +34,11 @@ const Conversations = ({
     let to;
     let from;
 
+    if (!active) {
+      setText('');
+      return;
+    }
+
     const activeConversation = conversations.find(
       (convo) => convo._id === active
     );
@@ -44,10 +53,6 @@ const Conversations = ({
 
     console.log(`The message is sent from user id ${from} to user id ${to}`);
   };
-
-  useEffect(() => {
-    getConversations();
-  }, [getConversations, getConversation]);
 
   return (
     <>
