@@ -14,26 +14,29 @@ const Conversations = ({
   getConversation,
   messenger: { conversation, conversations },
 }) => {
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(conversations[0]._id);
   const [text, setText] = useState('');
 
   const handleClick = (id) => {
     setActive(id);
     getConversation(id);
   };
-
+  console.log('Conversation from state', conversation);
+  console.log('Active Conversation from state', active);
+  console.log('Conversations from state', conversations);
+  console.log('user id from state', user._id);
   const onSubmit = (e) => {
     e.preventDefault();
     let to;
     let from;
 
-    if (conversation[0].to._id !== user._id) {
-      to = conversation[0].to._id;
-      from = conversation[0].from._id;
-    } else {
-      to = conversation[0].from._id;
-      from = conversation[0].to_id;
-    }
+    const activeConversation = conversations.find(
+      (convo) => convo._id === active
+    );
+
+    // LOOP THROUGH RECIPIENTS ARRAY AND ASSIGN TO AND FROM BASED ON WHO IS LOGGED IN
+    from = activeConversation.recipients.find((u) => u._id === user._id);
+    to = activeConversation.recipients.find((u) => u._id !== user._id);
 
     newMessage({ from, to, text });
 
@@ -44,7 +47,7 @@ const Conversations = ({
 
   useEffect(() => {
     getConversations();
-  }, [getConversations]);
+  }, [getConversations, getConversation]);
 
   return (
     <>

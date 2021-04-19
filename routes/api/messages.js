@@ -48,8 +48,6 @@ router.post('/', auth, async (req, res) => {
         date: Date.now(),
       });
 
-      console.log(newConversation);
-
       const conversation = await newConversation.save();
 
       const newMessage = new Message({
