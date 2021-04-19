@@ -71,7 +71,11 @@ const Conversations = ({
             }`}
           >
             <div className='desc-contact'>
-              <p className='name'>{convo.recipients[0].name}</p>
+              <p className='name'>
+                {convo.recipients[0].name === user.name
+                  ? convo.recipients[1].name
+                  : convo.recipients[0].name}
+              </p>
               <p className='message'>{convo.lastMessage} </p>
             </div>
           </div>
