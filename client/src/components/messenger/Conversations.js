@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { connect } from 'react-redux';
 import {
   getConversation,
@@ -61,7 +62,39 @@ const Conversations = ({
 
   return (
     <>
-      <section className='conversation-items'>
+      <Tabs>
+        <TabList className='form-group-row'>
+          <Tab>Chats</Tab>
+          <Tab>Users</Tab>
+        </TabList>
+
+        <TabPanel>
+          <section className='conversation-items'>
+            {conversations.map((convo) => (
+              <div
+                onClick={() => handleClick(convo._id)}
+                key={convo._id}
+                className={`conversation-item ${
+                  active === convo._id ? 'active' : ''
+                }`}
+              >
+                <div className='desc-contact'>
+                  <p className='name'>
+                    {convo.recipients[0].name === user.name
+                      ? convo.recipients[1].name
+                      : convo.recipients[0].name}
+                  </p>
+                  <p className='message'>{convo.lastMessage} </p>
+                </div>
+              </div>
+            ))}
+          </section>
+        </TabPanel>
+        <TabPanel>
+          <h2>Users</h2>
+        </TabPanel>
+      </Tabs>
+      {/* <section className='conversation-items'>
         {conversations.map((convo) => (
           <div
             onClick={() => handleClick(convo._id)}
@@ -80,7 +113,8 @@ const Conversations = ({
             </div>
           </div>
         ))}
-      </section>
+      </section> */}
+
       <div className='conversation'>
         <div className='messages'>
           <ul className='message-list'>
