@@ -77,8 +77,8 @@ const Conversations = ({
       </Tabs> */}
       <Tabs>
         <TabList className='form-group-row'>
-          <Tab className='bg-primary p-1'>Chats</Tab>
-          <Tab className='bg-dark p-1'>Users</Tab>
+          <Tab className='m-1'>Chats</Tab>
+          <Tab className='m-1'>Users</Tab>
         </TabList>
 
         <TabPanel>

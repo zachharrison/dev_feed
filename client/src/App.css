@@ -984,3 +984,10 @@ img {
 .react-tabs .conversation-items {
   width: 100%;
 }
+
+.react-tabs__tab--selected {
+  background: #34b7f1;
+  border-radius: 24px;
+  padding: 4px 18px;
+  color: #fff;
+}
