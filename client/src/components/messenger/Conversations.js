@@ -62,10 +62,23 @@ const Conversations = ({
 
   return (
     <>
-      <Tabs>
+      {/* <Tabs>
         <TabList className='form-group-row'>
           <Tab>Chats</Tab>
           <Tab>Users</Tab>
+        </TabList>
+
+        <TabPanel>
+          <h2>Chat Tab</h2>
+        </TabPanel>
+        <TabPanel>
+          <h2>Users Tab</h2>
+        </TabPanel>
+      </Tabs> */}
+      <Tabs>
+        <TabList className='form-group-row'>
+          <Tab className='bg-primary p-1'>Chats</Tab>
+          <Tab className='bg-dark p-1'>Users</Tab>
         </TabList>
 
         <TabPanel>
@@ -91,9 +104,10 @@ const Conversations = ({
           </section>
         </TabPanel>
         <TabPanel>
-          <h2>Users</h2>
+          <h2>Users Tab</h2>
         </TabPanel>
       </Tabs>
+
       {/* <section className='conversation-items'>
         {conversations.map((convo) => (
           <div
