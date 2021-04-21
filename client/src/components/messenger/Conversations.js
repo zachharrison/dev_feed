@@ -7,8 +7,11 @@ import {
   getConversations,
   newMessage,
 } from '../../actions/messenger';
+import { getProfiles } from '../../actions/profile';
 
 const Conversations = ({
+  getProfiles,
+  profile: { profiles, loading },
   auth: { user },
   newMessage,
   getConversations,
@@ -58,23 +61,11 @@ const Conversations = ({
 
   useEffect(() => {
     getConversations();
-  }, [getConversations]);
+    getProfiles();
+  }, [getConversations, getProfiles]);
 
   return (
     <>
-      {/* <Tabs>
-        <TabList className='form-group-row'>
-          <Tab>Chats</Tab>
-          <Tab>Users</Tab>
-        </TabList>
-
-        <TabPanel>
-          <h2>Chat Tab</h2>
-        </TabPanel>
-        <TabPanel>
-          <h2>Users Tab</h2>
-        </TabPanel>
-      </Tabs> */}
       <Tabs>
         <TabList className='form-group-row'>
           <Tab className='m-1'>Chats</Tab>
@@ -104,30 +95,11 @@ const Conversations = ({
           </section>
         </TabPanel>
         <TabPanel>
-          <h2>Users Tab</h2>
+          {profiles.map((profile) => (
+            <h2>{profile.user.name}</h2>
+          ))}
         </TabPanel>
       </Tabs>
-
-      {/* <section className='conversation-items'>
-        {conversations.map((convo) => (
-          <div
-            onClick={() => handleClick(convo._id)}
-            key={convo._id}
-            className={`conversation-item ${
-              active === convo._id ? 'active' : ''
-            }`}
-          >
-            <div className='desc-contact'>
-              <p className='name'>
-                {convo.recipients[0].name === user.name
-                  ? convo.recipients[1].name
-                  : convo.recipients[0].name}
-              </p>
-              <p className='message'>{convo.lastMessage} </p>
-            </div>
-          </div>
-        ))}
-      </section> */}
 
       <div className='conversation'>
         <div className='messages'>
@@ -162,6 +134,8 @@ Conversations.propTypes = {
   newMessage: PropTypes.func.isRequired,
   getConversations: PropTypes.func.isRequired,
   getConversation: PropTypes.func.isRequired,
+  getProfiles: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -169,10 +143,12 @@ const mapStateToProps = (state) => ({
   messenger: state.messenger,
   conversations: state.conversations,
   conversation: state.conversation,
+  profile: state.profile,
 });
 
 export default connect(mapStateToProps, {
   getConversation,
   getConversations,
   newMessage,
+  getProfiles,
 })(Conversations);
