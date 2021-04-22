@@ -22,6 +22,7 @@ export const newMessage = (msgData) => async (dispatch) => {
       payload: res.data,
     });
   } catch (error) {
+    console.log(error);
     dispatch({
       type: MESSENGER_ERROR,
       payload: {
@@ -42,6 +43,7 @@ export const getConversations = () => async (dispatch) => {
       payload: res.data,
     });
   } catch (error) {
+    console.log(error);
     dispatch({
       type: MESSENGER_ERROR,
       payload: {
@@ -64,6 +66,7 @@ export const getConversation = (conversationId) => async (dispatch) => {
       payload: res.data,
     });
   } catch (error) {
+    console.log(error);
     dispatch({
       type: MESSENGER_ERROR,
       payload: {
@@ -74,7 +77,7 @@ export const getConversation = (conversationId) => async (dispatch) => {
   }
 };
 
-export const createConversation = (recipients) => async (dispatch) => {
+export const newConversation = (recipients) => async (dispatch) => {
   try {
     const config = {
       headers: {
@@ -93,6 +96,7 @@ export const createConversation = (recipients) => async (dispatch) => {
       payload: res.data,
     });
   } catch (error) {
+    console.log(error);
     dispatch({
       type: MESSENGER_ERROR,
       payload: {

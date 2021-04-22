@@ -6,6 +6,7 @@ import {
   getConversation,
   getConversations,
   newMessage,
+  newConversation,
 } from '../../actions/messenger';
 import { getProfiles } from '../../actions/profile';
 
@@ -14,6 +15,7 @@ const Conversations = ({
   profile: { profiles, loading },
   auth: { user },
   newMessage,
+  newConversation,
   getConversations,
   getConversation,
   messenger: { conversation, conversations },
@@ -28,7 +30,12 @@ const Conversations = ({
     getConversation(id);
   };
 
-  const handleUserClick = (id) => {};
+  // CREATES A NEW CONVERSATION WHEN A USER ITEM IS CLICKED
+  const handleUserClick = (recipients, id) => {
+    setActive(id);
+    console.log(recipients);
+    newConversation(recipients);
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -100,9 +107,16 @@ const Conversations = ({
           <section className='profile-items'>
             {profiles.map((profile) => (
               <div
-                onClick={() => console.log(profile.user.name)}
+                onClick={() =>
+                  handleUserClick(
+                    { to: profile.user._id, from: user._id },
+                    profile.user._id
+                  )
+                }
                 key={profile.user.name}
-                className='profile-item'
+                className={`profile-item ${
+                  active === user._id ? 'active' : ''
+                }`}
               >
                 <div className='form-group-row'>
                   <img
@@ -149,6 +163,7 @@ Conversations.propTypes = {
   auth: PropTypes.object.isRequired,
   messenger: PropTypes.object.isRequired,
   newMessage: PropTypes.func.isRequired,
+  newConversation: PropTypes.func.isRequired,
   getConversations: PropTypes.func.isRequired,
   getConversation: PropTypes.func.isRequired,
   getProfiles: PropTypes.func.isRequired,
@@ -167,5 +182,6 @@ export default connect(mapStateToProps, {
   getConversation,
   getConversations,
   newMessage,
+  newConversation,
   getProfiles,
 })(Conversations);
