@@ -121,4 +121,24 @@ router.get(
   }
 );
 
+// @DESC      CREATE A NEW CONVERSATION
+// @ROUTE     POST /api/messages/conversations
+// @ACCESS    PRIVATE
+router.post('/conversations', auth, async (req, res) => {
+  const from = await User.findOne({ _id: req.body.from }).select('name');
+  const to = await User.findOne({ _id: req.body.to }).select('name');
+
+  try {
+    const newConversation = new Conversation({
+      recipients: [from, to],
+      date: Date.now(),
+    });
+    const conversation = await newConversation.save();
+    res.json(conversation);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 module.exports = router;
