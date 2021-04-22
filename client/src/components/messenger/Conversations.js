@@ -10,12 +10,11 @@ import {
 } from '../../actions/messenger';
 import { getProfiles } from '../../actions/profile';
 import { setAlert } from '../../actions/alert';
-import Spinner from '../layout/Spinner';
 
 const Conversations = ({
   getProfiles,
   profile: { profiles, loading },
-  auth: { user }, // REMINDER: GET LOADING STATE
+  auth: { user },
   newMessage,
   newConversation,
   getConversations,

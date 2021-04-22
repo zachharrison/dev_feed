@@ -1,7 +1,9 @@
 const express = require('express');
 const path = require('path');
 const connectDB = require('./config/db');
-
+const http = require('http');
+const socketio = require('socket.io');
+// API ROUTES
 const userRoutes = require('./routes/api/users');
 const authRoutes = require('./routes/api/auth');
 const profileRoutes = require('./routes/api/profile');
@@ -10,6 +12,10 @@ const messageRoutes = require('./routes/api/messages');
 const uploadRoutes = require('./routes/api/upload');
 
 const app = express();
+
+const server = http.createServer(app);
+
+const io = socketio(server);
 
 // CONNECT DATABASE
 connectDB();
