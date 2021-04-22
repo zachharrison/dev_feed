@@ -129,6 +129,16 @@ router.post('/conversations', auth, async (req, res) => {
   const to = await User.findOne({ _id: req.body.to }).select('name');
 
   try {
+    const foundConversation = await Conversation.findOne({
+      recipients: {
+        $all: [from, to],
+      },
+    });
+
+    if (foundConversation) {
+      return;
+    }
+
     const newConversation = new Conversation({
       recipients: [from, to],
       date: Date.now(),

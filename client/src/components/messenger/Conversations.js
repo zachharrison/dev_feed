@@ -13,7 +13,7 @@ import { getProfiles } from '../../actions/profile';
 const Conversations = ({
   getProfiles,
   profile: { profiles, loading },
-  auth: { user },
+  auth: { user }, // REMINDER: GET LOADING STATE
   newMessage,
   newConversation,
   getConversations,
