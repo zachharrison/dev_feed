@@ -16,8 +16,7 @@ const Profile = require('../../models/Profile');
 router.post('/', auth, async (req, res) => {
   const from = await User.findOne({ _id: req.body.from }).select('name');
   const to = await User.findOne({ _id: req.body.to }).select('name');
-  // console.log('FROM TEST', from);
-  // console.log('TO TEST', to);
+
   try {
     const conversation = await Conversation.findOne({
       recipients: {
@@ -26,20 +25,6 @@ router.post('/', auth, async (req, res) => {
     });
 
     if (!conversation) {
-      // const conversation = await Conversation.findOneAndUpdate(
-      //   {
-      //     recipients: {
-      //       $all: [{ $elemMatch: { $eq: from } }, { $elemMatch: { $eq: to } }],
-      //     },
-      //   },
-      //   {
-      //     recipients: [from, to], // REMOVE ID AND JUST LEAVE THE OBJECT
-      //     lastMessage: req.body.text,
-      //     date: Date.now(),
-      //   },
-      //   { upsert: true, new: true, setDefaultsOnInsert: true }
-      // );
-
       const recipients = [to, from];
 
       const newConversation = new Conversation({
@@ -98,17 +83,6 @@ router.post('/', auth, async (req, res) => {
 router.get('/conversations', auth, async (req, res) => {
   const from = mongoose.Types.ObjectId(req.user.id);
   try {
-    // const conversations = await Conversation.aggregate([
-    //   {
-    //     $lookup: {
-    //       from: 'user',
-    //       localField: '_id',
-    //       foreignField: 'recipients[1]._id',
-    //       as: 'recipientObj',
-    //     },
-    //   },
-    // ]).match({ recipients: { $all: [{ $elemMatch: { $eq: from } }] } });
-
     const conversations = await Conversation.find({
       recipients: {
         $elemMatch: {
