@@ -95,9 +95,24 @@ const Conversations = ({
           </section>
         </TabPanel>
         <TabPanel>
-          {profiles.map((profile) => (
-            <h2>{profile.user.name}</h2>
-          ))}
+          <section className='profile-items'>
+            {profiles.map((profile) => (
+              <div
+                onClick={() => console.log('clicked')}
+                key={profile.user.name}
+                className='profile-item'
+              >
+                <div className='form-group-row'>
+                  <img
+                    className='photo mx-1'
+                    src={profile.image}
+                    alt='profile'
+                  />
+                  <p>{profile.user.name}</p>
+                </div>
+              </div>
+            ))}
+          </section>
         </TabPanel>
       </Tabs>
 
