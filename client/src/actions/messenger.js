@@ -26,8 +26,8 @@ export const newMessage = (msgData) => async (dispatch) => {
     dispatch({
       type: MESSENGER_ERROR,
       payload: {
-        msg: error.response.statusText,
-        status: error.response.status,
+        msg: error,
+        status: error,
       },
     });
   }
@@ -47,8 +47,8 @@ export const getConversations = () => async (dispatch) => {
     dispatch({
       type: MESSENGER_ERROR,
       payload: {
-        msg: error.response.statusText,
-        status: error.response.status,
+        msg: error,
+        status: error,
       },
     });
   }
@@ -70,8 +70,8 @@ export const getConversation = (conversationId) => async (dispatch) => {
     dispatch({
       type: MESSENGER_ERROR,
       payload: {
-        msg: error.response.statusText,
-        status: error.response.status,
+        msg: error,
+        status: error,
       },
     });
   }
@@ -100,8 +100,8 @@ export const newConversation = (recipients) => async (dispatch) => {
     dispatch({
       type: MESSENGER_ERROR,
       payload: {
-        msg: error.response.statusText,
-        status: error.response.status,
+        msg: error,
+        status: error,
       },
     });
   }
