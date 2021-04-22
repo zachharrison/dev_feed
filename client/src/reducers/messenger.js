@@ -4,6 +4,7 @@ import {
   NEW_MESSAGE,
   MESSENGER_ERROR,
   CLEAR_MESSENGER,
+  NEW_CONVERSATION,
 } from '../actions/constants';
 
 const initialState = {
@@ -33,6 +34,13 @@ export default function messengerReducer(state = initialState, action) {
       return {
         ...state,
         conversation: [...state.conversation, payload],
+        loading: false,
+      };
+    case NEW_CONVERSATION:
+      return {
+        ...state,
+        conversations: [...state.conversations, payload],
+        loading: false,
       };
     case CLEAR_MESSENGER:
       return {
