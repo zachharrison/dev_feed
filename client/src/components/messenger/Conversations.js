@@ -111,29 +111,31 @@ const Conversations = ({
             </TabPanel>
             <TabPanel>
               <section className='profile-items'>
-                {profiles.map((profile) => (
-                  <div
-                    onClick={() =>
-                      handleUserClick(
-                        { to: profile.user._id, from: user._id },
-                        profile.user._id
-                      )
-                    }
-                    key={profile.user.name}
-                    className={`profile-item ${
-                      active === user._id ? 'active' : ''
-                    }`}
-                  >
-                    <div className='form-group-row'>
-                      <img
-                        className='photo mx-1'
-                        src={profile.image}
-                        alt='profile'
-                      />
-                      <p>{profile.user.name}</p>
+                {profiles
+                  .filter((profile) => profile.user._id !== user._id)
+                  .map((profile) => (
+                    <div
+                      onClick={() =>
+                        handleUserClick(
+                          { to: profile.user._id, from: user._id },
+                          profile.user._id
+                        )
+                      }
+                      key={profile.user.name}
+                      className={`profile-item ${
+                        active === user._id ? 'active' : ''
+                      }`}
+                    >
+                      <div className='form-group-row'>
+                        <img
+                          className='photo mx-1'
+                          src={profile.image}
+                          alt='profile'
+                        />
+                        <p>{profile.user.name}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
               </section>
             </TabPanel>
           </Tabs>
