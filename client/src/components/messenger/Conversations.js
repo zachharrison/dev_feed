@@ -23,10 +23,12 @@ const Conversations = ({
   );
   const [text, setText] = useState('');
 
-  const handleClick = (id) => {
+  const handleConversationClick = (id) => {
     setActive(id);
     getConversation(id);
   };
+
+  const handleUserClick = (id) => {};
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -76,7 +78,7 @@ const Conversations = ({
           <section className='conversation-items'>
             {conversations.map((convo) => (
               <div
-                onClick={() => handleClick(convo._id)}
+                onClick={() => handleConversationClick(convo._id)}
                 key={convo._id}
                 className={`conversation-item ${
                   active === convo._id ? 'active' : ''
@@ -98,7 +100,7 @@ const Conversations = ({
           <section className='profile-items'>
             {profiles.map((profile) => (
               <div
-                onClick={() => console.log('clicked')}
+                onClick={() => console.log(profile.user.name)}
                 key={profile.user.name}
                 className='profile-item'
               >
@@ -121,7 +123,7 @@ const Conversations = ({
           <ul className='message-list'>
             {conversation.map((convo, index) => (
               <li
-                key={index}
+                key={convo._id}
                 className={convo.from._id === user._id ? 'replies' : 'sent'}
               >
                 <p>{convo.text}</p>

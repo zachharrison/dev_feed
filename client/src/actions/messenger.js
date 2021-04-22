@@ -3,6 +3,7 @@ import {
   GET_CONVERSATIONS,
   GET_CONVERSATION,
   NEW_MESSAGE,
+  NEW_CONVERSATION,
   MESSENGER_ERROR,
 } from './constants';
 
@@ -60,6 +61,35 @@ export const getConversation = (conversationId) => async (dispatch) => {
 
     dispatch({
       type: GET_CONVERSATION,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: MESSENGER_ERROR,
+      payload: {
+        msg: error.response.statusText,
+        status: error.response.status,
+      },
+    });
+  }
+};
+
+export const createConversation = (recipients) => async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const res = await axios.post(
+      '/api/messages/conversations',
+      recipients,
+      config
+    );
+
+    dispatch({
+      type: NEW_CONVERSATION,
       payload: res.data,
     });
   } catch (error) {
