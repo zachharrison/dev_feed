@@ -916,7 +916,8 @@ img {
   border: none;
   outline: none;
 }
-.conversation-item.active {
+.conversation-item.active,
+.profile-item.active {
   background-color: #eeeeee;
 }
 .messages {

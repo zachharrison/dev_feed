@@ -9,6 +9,7 @@ import {
   newConversation,
 } from '../../actions/messenger';
 import { getProfiles } from '../../actions/profile';
+import { setAlert } from '../../actions/alert';
 import Spinner from '../layout/Spinner';
 
 const Conversations = ({
@@ -19,22 +20,24 @@ const Conversations = ({
   newConversation,
   getConversations,
   getConversation,
+  setAlert,
   messenger: { conversation, conversations },
 }) => {
   console.log('loading is', loading);
-  const [active, setActive] = useState(
+  const [activeConversation, setActiveConversation] = useState(
     conversations.length ? conversations[0]._id : ''
   );
+  const [activeUser, setActiveUser] = useState('');
   const [text, setText] = useState('');
 
   const handleConversationClick = (id) => {
-    setActive(id);
+    setActiveConversation(id);
     getConversation(id);
   };
 
   // CREATES A NEW CONVERSATION WHEN A USER ITEM IS CLICKED
   const handleUserClick = (recipients, id) => {
-    setActive(id);
+    setActiveUser(id);
     console.log(recipients);
     newConversation(recipients);
   };
@@ -44,18 +47,19 @@ const Conversations = ({
     let to;
     let from;
 
-    if (!active) {
+    if (!activeConversation) {
+      setAlert('Please select a chat', 'danger');
       setText('');
       return;
     }
 
-    const activeConversation = conversations.find(
-      (convo) => convo._id === active
+    const activeConvo = conversations.find(
+      (convo) => convo._id === activeConversation
     );
 
     // LOOP THROUGH RECIPIENTS ARRAY AND ASSIGN TO AND FROM BASED ON WHO IS LOGGED IN
-    from = activeConversation.recipients.find((u) => u._id === user._id);
-    to = activeConversation.recipients.find((u) => u._id !== user._id);
+    from = activeConvo.recipients.find((u) => u._id === user._id);
+    to = activeConvo.recipients.find((u) => u._id !== user._id);
 
     newMessage({ from, to, text });
 
@@ -94,7 +98,7 @@ const Conversations = ({
                     onClick={() => handleConversationClick(convo._id)}
                     key={convo._id}
                     className={`conversation-item ${
-                      active === convo._id ? 'active' : ''
+                      activeConversation === convo._id ? 'active' : ''
                     }`}
                   >
                     <div className='desc-contact'>
@@ -123,7 +127,7 @@ const Conversations = ({
                       }
                       key={profile.user.name}
                       className={`profile-item ${
-                        active === user._id ? 'active' : ''
+                        activeUser === profile.user._id ? 'active' : ''
                       }`}
                     >
                       <div className='form-group-row'>
@@ -174,6 +178,7 @@ Conversations.propTypes = {
   messenger: PropTypes.object.isRequired,
   newMessage: PropTypes.func.isRequired,
   newConversation: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired,
   getConversations: PropTypes.func.isRequired,
   getConversation: PropTypes.func.isRequired,
   getProfiles: PropTypes.func.isRequired,
@@ -194,4 +199,5 @@ export default connect(mapStateToProps, {
   newMessage,
   newConversation,
   getProfiles,
+  setAlert,
 })(Conversations);
