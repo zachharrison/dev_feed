@@ -85,17 +85,10 @@ const Conversations = ({
       transports: ['websocket'],
     });
     socket.on('messages', (data) => {
-      console.log(data);
-      getConversation(data.conversation);
       getConversations();
-      setActiveConversation(data.conversation);
+      getConversation(data.conversation);
     });
-  }, [
-    getConversation,
-    getConversations,
-    setActiveConversation,
-    activeConversation,
-  ]);
+  }, [onSubmit]);
 
   return (
     <>
