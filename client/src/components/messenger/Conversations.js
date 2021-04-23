@@ -65,8 +65,6 @@ const Conversations = ({
     newMessage({ from, to, text });
 
     setText('');
-
-    console.log(`The message is sent from user id ${from} to user id ${to}`);
   };
 
   useEffect(() => {
@@ -88,10 +86,16 @@ const Conversations = ({
     });
     socket.on('messages', (data) => {
       console.log(data);
+      getConversation(data.conversation);
       getConversations();
-      getConversation(activeConversation);
+      setActiveConversation(data.conversation);
     });
-  }, []);
+  }, [
+    getConversation,
+    getConversations,
+    setActiveConversation,
+    activeConversation,
+  ]);
 
   return (
     <>
