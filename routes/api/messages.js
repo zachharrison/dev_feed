@@ -42,6 +42,8 @@ router.post('/', auth, async (req, res) => {
         text: req.body.text,
       });
 
+      req.io.sockets.emit('messages', req.body.text);
+
       const message = await newMessage.save();
 
       res.json(message);
@@ -66,6 +68,8 @@ router.post('/', auth, async (req, res) => {
         from,
         text: req.body.text,
       });
+
+      req.io.sockets.emit('messages', req.body.text, conversation);
 
       const message = await newMessage.save();
 

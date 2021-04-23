@@ -10,6 +10,7 @@ import {
 } from '../../actions/messenger';
 import { getProfiles } from '../../actions/profile';
 import { setAlert } from '../../actions/alert';
+import socketIOClient from 'socket.io-client';
 
 const Conversations = ({
   getProfiles,
@@ -22,7 +23,9 @@ const Conversations = ({
   setAlert,
   messenger: { conversation, conversations },
 }) => {
-  console.log('loading is', loading);
+  // const socket = socketIOClient('http://localhost:5000', {
+  //   transports: ['websocket'],
+  // });
   const [activeConversation, setActiveConversation] = useState(
     conversations.length ? conversations[0]._id : ''
   );
@@ -37,7 +40,6 @@ const Conversations = ({
   // CREATES A NEW CONVERSATION WHEN A USER ITEM IS CLICKED
   const handleUserClick = (recipients, id) => {
     setActiveUser(id);
-    console.log(recipients);
     newConversation(recipients);
   };
 
@@ -79,6 +81,17 @@ const Conversations = ({
       getProfiles();
     }
   }, [getConversations, getProfiles, loading]);
+
+  useEffect(() => {
+    const socket = socketIOClient('http://localhost:5000', {
+      transports: ['websocket'],
+    });
+    socket.on('messages', (data) => {
+      console.log(data);
+      getConversations();
+      getConversation(activeConversation);
+    });
+  }, []);
 
   return (
     <>
