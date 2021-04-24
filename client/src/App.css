@@ -542,6 +542,9 @@
   .profile-grid {
     grid-template-areas: 'top' 'about' 'exp' 'edu' 'github' !important;
   }
+  .profiles-grid {
+    grid-template-columns: 1fr;
+  }
   .profile-about .skills {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
