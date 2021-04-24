@@ -554,10 +554,23 @@
   .post {
     -ms-grid-columns: 1fr;
     grid-template-columns: 1fr;
+    width: 95%;
+    margin: 1rem auto;
   }
   .post a,
   .post button {
     padding: 0.3rem 0.4rem;
+  }
+  .post .round-img {
+    height: 75px;
+    width: 75px;
+  }
+  .post-form .form .form-group {
+    width: 75%;
+  }
+  .post div p {
+    width: 100%;
+    word-break: break-word;
   }
   .conversation-items {
     min-width: 100%;
@@ -565,6 +578,12 @@
   }
   .conversation {
     display: none;
+  }
+  .post-form .form .form-group {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 * {
