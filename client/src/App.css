@@ -486,12 +486,9 @@
   .form .form-group input {
     width: 100%;
   }
-  /* .post-form {
-    width: 100px;
-  } */
-  .post-form .form {
+  /* .post-form .form {
     margin: 0;
-  }
+  } */
   .navbar {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -566,7 +563,8 @@
     width: 75px;
   }
   .post-form .form .form-group {
-    width: 75%;
+    width: 100%;
+    margin: 0 auto;
   }
   .post div p {
     width: 100%;
@@ -580,7 +578,7 @@
     display: none;
   }
   .post-form .form .form-group {
-    width: 80%;
+    width: 75%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -797,7 +795,6 @@ img {
   flex-basis: 20%;
 }
 .post-form {
-  margin: auto;
   width: 600px;
 }
 .post-form .form .form-group textarea,
@@ -996,7 +993,6 @@ img {
 }
 
 .react-tabs {
-  /* background: lightblue; */
   height: 100%;
   width: 75%;
   border-top-left-radius: 18px;
@@ -1006,6 +1002,10 @@ img {
   overflow: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.react-tabs:hover {
+  cursor: pointer;
 }
 
 .react-tabs::-webkit-scrollbar {

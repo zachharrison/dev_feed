@@ -23,9 +23,6 @@ const Conversations = ({
   setAlert,
   messenger: { conversation, conversations },
 }) => {
-  // const socket = socketIOClient('http://localhost:5000', {
-  //   transports: ['websocket'],
-  // });
   const [activeConversation, setActiveConversation] = useState(
     conversations.length ? conversations[0]._id : ''
   );
@@ -71,6 +68,7 @@ const Conversations = ({
     if (conversations.length) {
       getConversation(conversations[0]._id);
     }
+    // eslint-next-line
   }, []);
 
   useEffect(() => {
