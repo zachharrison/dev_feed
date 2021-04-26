@@ -21,7 +21,7 @@ export default function messengerReducer(state = initialState, action) {
     case GET_CONVERSATIONS:
       return {
         ...state,
-        conversations: payload,
+        conversations: payload.reverse(),
         loading: false,
       };
     case GET_CONVERSATION:
