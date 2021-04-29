@@ -21,6 +21,11 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
             <i className='fab fa-connectdevelop' /> Browse and connect with
             developers
           </p>
+          <input
+            type='text'
+            className='search-form'
+            placeholder='Search for devs...'
+          />
           <div className='profiles profiles-grid'>
             {profiles.length > 0 ? (
               profiles.map((profile) => (
