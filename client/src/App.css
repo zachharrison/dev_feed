@@ -525,9 +525,12 @@
     height: 100px;
     margin: 0 auto;
   }
+  .profile-grid {
+    display: block !important;
+  }
   .profile-grid .profile-top img {
-    width: 250px;
-    height: 250px;
+    width: 200px !important;
+    height: 200px !important;
   }
   .profiles .profile ul {
     display: none;
