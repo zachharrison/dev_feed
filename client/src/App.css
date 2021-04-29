@@ -437,10 +437,6 @@
   }
 }
 @media (max-width: 700px) {
-  .chat-container {
-    width: 500px;
-  }
-
   .comment-text {
     padding: 0.5rem;
   }
@@ -572,16 +568,32 @@
   }
   .conversation-items {
     min-width: 100%;
-    border-radius: 18px;
-  }
-  .conversation {
-    display: none;
   }
   .post-form .form .form-group {
     width: 75%;
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  .chat-container {
+    width: 400px;
+  }
+  .react-tabs {
+    width: 50% !important;
+  }
+  .react-tabs .form-group-row li {
+    margin: 1rem 3px !important;
+  }
+  .react-tabs__tab--selected {
+    padding: 2px 9px !important;
+  }
+  .messages {
+    margin: 0rem !important;
+  }
+  .profile-items .profile-item .photo {
+    width: 35px !important;
+    height: 35px !important;
+    margin-left: 10px !important;
   }
 }
 * {
@@ -1001,6 +1013,10 @@ img {
   overflow: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.react-tabs .form-group-row li {
+  margin: 1rem;
 }
 
 .react-tabs:hover {

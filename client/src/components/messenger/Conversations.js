@@ -94,8 +94,8 @@ const Conversations = ({
         <>
           <Tabs>
             <TabList className='form-group-row'>
-              <Tab className='m-1'>Chats</Tab>
-              <Tab className='m-1'>Users</Tab>
+              <Tab>Chats</Tab>
+              <Tab>Users</Tab>
             </TabList>
 
             <TabPanel>
