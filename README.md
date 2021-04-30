@@ -2,6 +2,20 @@
 
 > Social Network for developers built with the MERN stack, Socketio, GitHub API, and Redux.
 
+## Screenshots
+
+![Dashboard](./screenshots/dashboard.png)
+
+![New Post](./screenshots/new-post.png)
+
+![Comments](./screenshots/comments.png)
+
+![Developers](./screenshots/developers.png)
+
+![Profile](./screenshots/profile.png)
+
+![Chat](./screenshots/chat.png)
+
 ```
 Sample User Logins
 
