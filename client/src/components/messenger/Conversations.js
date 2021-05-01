@@ -76,6 +76,7 @@ const Conversations = ({
       getConversations();
       getProfiles();
     }
+    // eslint-disable-next-line
   }, [getConversations, getProfiles, loading]);
 
   useEffect(() => {
@@ -86,6 +87,7 @@ const Conversations = ({
       getConversations();
       getConversation(data.conversation);
     });
+    // eslint-disable-next-line
   }, [onSubmit]);
 
   return (
