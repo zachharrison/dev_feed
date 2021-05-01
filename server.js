@@ -20,17 +20,11 @@ const server = app.listen(PORT, () =>
 
 const io = require('socket.io').listen(server);
 
-// io.on('connection', (socket) => {
-//   console.log('SOCKET CONNECTED');
-// });
-
 // CONNECT DATABASE
 connectDB();
 
 // INIT MIDDLEWARE
 app.use(express.json({ extended: false }));
-
-app.get('/', (req, res) => res.send('API Running'));
 
 // ASSIGN SOCKET OBJECT TO EVERY REQUEST
 app.use((req, res, next) => {
@@ -46,3 +40,13 @@ app.use('/api/messages', messageRoutes);
 app.use('/api/upload', uploadRoutes);
 
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+
+// SERVE STATIC ASSETS IN PRODUCTION
+if (process.env.NODE_ENV === 'production') {
+  // SET STATIC FOLDER
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
