@@ -87,7 +87,6 @@ const Conversations = ({
       getConversations();
       getConversation(data.conversation);
     });
-    // eslint-disable-next-line
   }, [onSubmit]);
 
   return (
