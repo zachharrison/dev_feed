@@ -4,15 +4,21 @@
 
 ## Screenshots
 
+
 ![Dashboard](./screenshots/dashboard.png)
+
 
 ![New Post](./screenshots/new-post.png)
 
+
 ![Comments](./screenshots/comments.png)
+
 
 ![Developers](./screenshots/developers.png)
 
+
 ![Profile](./screenshots/profile.png)
+
 
 ![Chat](./screenshots/chat.png)
 
