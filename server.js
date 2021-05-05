@@ -1,4 +1,5 @@
 const express = require('express');
+const dotenv = require('dotenv');
 const path = require('path');
 const connectDB = require('./config/db');
 
@@ -9,6 +10,8 @@ const profileRoutes = require('./routes/api/profile');
 const postRoutes = require('./routes/api/posts');
 const messageRoutes = require('./routes/api/messages');
 const uploadRoutes = require('./routes/api/upload');
+
+dotenv.config();
 
 const app = express();
 
