@@ -4,7 +4,6 @@ const auth = require('../../middleware/auth');
 const checkObjectId = require('../../middleware/checkObjectId');
 const { check, validationResult } = require('express-validator');
 const axios = require('axios');
-const config = require('config');
 const normalize = require('normalize-url');
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
