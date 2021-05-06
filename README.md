@@ -1,20 +1,8 @@
 # DevFeed
 
-> Social Network for developers built with the MERN stack, Socketio, GitHub API, Redux, and MongoDB.
+> Social Network for developers built with the MERN stack, Socketio, JSON Web Token, GitHub API, Redux, and MongoDB.
 
-## Screenshots
-
-![Dashboard](./screenshots/dashboard.png)
-
-![New Post](./screenshots/new-post.png)
-
-![Comments](./screenshots/comments.png)
-
-![Developers](./screenshots/developers.png)
-
-![Profile](./screenshots/profile.png)
-
-![Chat](./screenshots/chat.png)
+[Live Demo](https://dev-feed-social.herokuapp.com/)
 
 ```
 Sample User Logins
@@ -36,7 +24,22 @@ password: password
 - Unlike a post if you have already liked it
 - find other developers in the DevFeed community with a search form to find users by name
 - Chat feature to communicate with other users
+- Search filter to find users by name
 - Fully responsive UI
+
+## Screenshots
+
+![Dashboard](./screenshots/dashboard.png)
+
+![New Post](./screenshots/new-post.png)
+
+![Comments](./screenshots/comments.png)
+
+![Developers](./screenshots/developers.png)
+
+![Profile](./screenshots/profile.png)
+
+![Chat](./screenshots/chat.png)
 
 ---
 
